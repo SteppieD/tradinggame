@@ -1,0 +1,18 @@
+{
+  "trades": [
+    {
+      "date": "2025-08-12",
+      "time": "12:35 PM",
+      "amount_invested": 970.67,
+      "iwm_price": 220.27,
+      "spy_price": 635.91,
+      "iwm_shares_bought": 4.406,
+      "spy_shares_bought": 1.527
+    }
+  ],
+  "totals": {
+    "total_invested": 970.67,
+    "iwm_total_shares": 4.406,
+    "spy_total_shares": 1.527
+  }
+}

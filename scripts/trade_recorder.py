@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 import pandas as pd
 from portfolio_tracker import PortfolioTracker
+from benchmark_tracker import BenchmarkTracker
 
 class TradeRecorder:
     def __init__(self):
@@ -18,6 +19,7 @@ class TradeRecorder:
         self.executions_path = self.base_path / "data" / "executions"
         self.executions_path.mkdir(parents=True, exist_ok=True)
         self.portfolio = PortfolioTracker()
+        self.benchmark_tracker = BenchmarkTracker()
         
     def record_trade(self, trade_data):
         """Record a single trade execution"""
@@ -66,6 +68,18 @@ class TradeRecorder:
                 trade_data['quantity'],
                 trade_data['price']
             )
+            # Record benchmark prices for buy trades
+            try:
+                trade_amount = trade_data['actual_cost']
+                benchmark_record = self.benchmark_tracker.record_trade_benchmarks(
+                    trade_amount, 
+                    trade_data['time']
+                )
+                if benchmark_record:
+                    trade_data['benchmark_tracking'] = benchmark_record
+            except Exception as e:
+                print(f"Warning: Could not record benchmark data: {e}")
+                
         elif trade_data['action'].upper() == 'SELL':
             self.portfolio.remove_position(
                 trade_data['symbol'],
@@ -244,6 +258,18 @@ class TradeRecorder:
         print(f"  Positions: {len(portfolio_data['positions'])}")
         if portfolio_data.get('total_value'):
             print(f"  Total Value: ${portfolio_data['total_value']:.2f}")
+            
+        # Show benchmark comparison if we have trades
+        try:
+            benchmark_data = self.benchmark_tracker.get_current_benchmark_value()
+            if benchmark_data:
+                total_invested = sum(trade['actual_cost'] for trade in executions['trades'] if trade['action'].upper() == 'BUY')
+                self.benchmark_tracker.print_benchmark_comparison(
+                    portfolio_data.get('total_value', portfolio_data['cash_balance']),
+                    total_invested
+                )
+        except Exception as e:
+            print(f"Warning: Could not display benchmark comparison: {e}")
 
 def interactive_input():
     """Interactive trade input"""

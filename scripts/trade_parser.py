@@ -10,10 +10,12 @@ import json
 from datetime import datetime
 from pathlib import Path
 from trade_recorder import TradeRecorder
+from benchmark_tracker import BenchmarkTracker
 
 class TradeParser:
     def __init__(self):
         self.recorder = TradeRecorder()
+        self.benchmark_tracker = BenchmarkTracker()
         self.base_path = Path(__file__).parent.parent
         
     def parse_trades_from_text(self, text):
@@ -136,6 +138,14 @@ class TradeParser:
         if recorded:
             print(f"\n📊 Successfully recorded {len(recorded)} trades")
             self.recorder.print_execution_summary()
+            
+            # Show benchmark comparison
+            try:
+                total_buy_amount = sum(trade['quantity'] * trade['price'] for trade in recorded if trade['action'].upper() == 'BUY')
+                if total_buy_amount > 0:
+                    print("\n📊 Benchmark comparison will be updated automatically with each trade")
+            except Exception as e:
+                print(f"Note: Benchmark tracking available in trade summary")
         
         return recorded
     

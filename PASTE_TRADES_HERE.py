@@ -11,9 +11,7 @@ Then run: python PASTE_TRADES_HERE.py
 # ============================================
 
 trades = """
-BUY 26 CHPT @ 10.7845 at 12:35 PM
-BUY 82 EVGO @ 3.6271 at 12:36 PM
-BUY 97 FCEL @ 4.05 at 12:37 PM
+PASTE YOUR TRADES HERE
 """
 
 # ============================================
