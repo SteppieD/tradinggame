@@ -29,11 +29,11 @@ This project leverages [Claude Code](https://claude.ai/code) AI agents for:
 
 ## 🔄 Inspired By
 
-This project is a riff on [ChadGPT Day Trader](https://github.com/turing-machines/ChadGPT-DayTrader) by Turing Machines, adapted for:
+This project is a riff on [ChatGPT Micro Cap Experiment](https://github.com/LuckyOne7777/ChatGPT-Micro-Cap-Experiment) by LuckyOne7777, adapted for:
 - Canadian TFSA trading rules
-- Small-cap focus ($50M-$2B market cap)
+- Claude Code AI agents (instead of ChatGPT)
 - CIBC Investor's Edge platform
-- Risk-managed position sizing
+- Risk-managed position sizing with trailing stops
 
 ## ✨ Features
 
@@ -141,7 +141,7 @@ MIT License - feel free to fork and adapt for your own trading experiments!
 ## 🔗 Links
 
 - **YouTube:** [AI Business Lab](https://www.youtube.com/@aibusiness-lab)
-- **Original Inspiration:** [ChadGPT Day Trader](https://github.com/turing-machines/ChadGPT-DayTrader)
+- **Original Inspiration:** [ChatGPT Micro Cap Experiment](https://github.com/LuckyOne7777/ChatGPT-Micro-Cap-Experiment)
 - **Claude Code:** [claude.ai/code](https://claude.ai/code)
 - **This Repo:** [github.com/SteppieD/tradinggame](https://github.com/SteppieD/tradinggame)
 
