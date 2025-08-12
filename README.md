@@ -47,9 +47,11 @@ This project is a riff on [ChatGPT Micro Cap Experiment](https://github.com/Luck
 open dashboard.html
 ```
 - Live position tracking with P&L
+- **Market comparison vs Russell 2000 (IWM) and S&P 500 (SPY)**
 - Dark mode for any-time monitoring
 - Position management tracker with action triggers
 - Daily trading checklist
+- Automatic benchmark tracking shows if we're beating the market
 
 ### 🤖 AI Trading Agents
 - `small-cap-screener` - Finds momentum opportunities
@@ -59,8 +61,11 @@ open dashboard.html
 
 ### 📈 Automated Workflows
 ```bash
-# Record trades from broker
+# Record trades from broker (automatically tracks benchmarks!)
 python PASTE_TRADES_HERE.py
+
+# View benchmark comparison
+python scripts/benchmark_summary.py
 
 # Generate daily orders
 python scripts/order_generator.py
@@ -68,6 +73,13 @@ python scripts/order_generator.py
 # Screen for opportunities
 python scripts/stock_screener.py
 ```
+
+### 🎯 Automatic Benchmark Tracking
+Every trade automatically captures IWM and SPY prices for real-time performance comparison:
+- Records benchmark prices at exact trade time
+- Calculates equivalent benchmark shares
+- Shows if you're beating the market (alpha)
+- Updates dashboard with live comparison
 
 ## 🚀 Quick Start
 
