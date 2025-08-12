@@ -1,0 +1,17 @@
+{
+  "date": "2025-01-01",
+  "trades": [
+    {
+      "symbol": "EXAMPLE",
+      "action": "BUY",
+      "quantity": 100,
+      "price": 5.00,
+      "time": "09:30 AM",
+      "total_value": 500.00,
+      "actual_cost": 506.95,
+      "commission": 6.95
+    }
+  ],
+  "total_invested": 506.95,
+  "total_commission": 6.95
+}

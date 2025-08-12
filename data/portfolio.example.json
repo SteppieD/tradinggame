@@ -1,0 +1,25 @@
+{
+  "cash_balance": 1000.00,
+  "starting_balance": 1000,
+  "positions": [
+    {
+      "symbol": "EXAMPLE",
+      "quantity": 100,
+      "entry_price": 5.00,
+      "entry_date": "2025-01-01T09:30:00.000000",
+      "last_updated": "2025-01-01T09:30:00.000000",
+      "stop_loss": 4.50,
+      "target_price": 6.00
+    }
+  ],
+  "pending_orders": [],
+  "last_updated": "2025-01-01T09:30:00.000000",
+  "total_value": 1000.00,
+  "total_pnl": 0,
+  "total_pnl_percent": 0.0,
+  "broker_info": {
+    "name": "CIBC Investor's Edge",
+    "account_type": "TFSA",
+    "commission_per_trade": 6.95
+  }
+}

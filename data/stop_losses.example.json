@@ -1,0 +1,19 @@
+{
+  "stop_loss_orders": [
+    {
+      "symbol": "EXAMPLE",
+      "quantity": 100,
+      "stop_price": 4.50,
+      "limit_price": 4.45,
+      "order_type": "STOP_LIMIT",
+      "trailing_stop": {
+        "enabled": true,
+        "trail_amount": 0.50,
+        "trail_percent": 10
+      },
+      "created_date": "2025-01-01T09:30:00",
+      "status": "ACTIVE"
+    }
+  ],
+  "last_updated": "2025-01-01T09:30:00"
+}
