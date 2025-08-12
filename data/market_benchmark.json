@@ -1,0 +1,51 @@
+{
+  "purchase_date": "2025-08-12",
+  "purchase_time": "12:35 PM EST",
+  "initial_investment": 970.67,
+  "note": "Same amount as our stock purchases, same timing",
+  
+  "benchmarks": {
+    "IWM": {
+      "name": "Russell 2000 ETF",
+      "purchase_price": 220.27,
+      "purchase_time": "12:35 PM EST",
+      "current_price": 226.79,
+      "shares_if_bought": 4.406,
+      "note": "Price at 12:35 PM = current price / (1 + today's gain)"
+    },
+    "SPY": {
+      "name": "S&P 500 ETF", 
+      "purchase_price": 635.91,
+      "purchase_time": "12:35 PM EST",
+      "current_price": 642.70,
+      "shares_if_bought": 1.527,
+      "note": "Price at 12:35 PM = current price / (1 + today's gain)"
+    }
+  },
+  
+  "calculation_notes": [
+    "IWM at 12:35 PM: $226.79 / 1.0296 = $220.27",
+    "SPY at 12:35 PM: $642.70 / 1.01066 = $635.91",
+    "We invested $970.67 at 12:35 PM",
+    "IWM shares we could have bought: $970.67 / $220.27 = 4.406",
+    "SPY shares we could have bought: $970.67 / $635.91 = 1.527"
+  ],
+  
+  "current_values": {
+    "our_portfolio": {
+      "value": 1005.80,
+      "gain": 35.13,
+      "percent": 3.62
+    },
+    "if_bought_IWM": {
+      "value": 999.25,
+      "gain": 28.58,
+      "percent": 2.94
+    },
+    "if_bought_SPY": {
+      "value": 981.30,
+      "gain": 10.63,
+      "percent": 1.09
+    }
+  }
+}

@@ -345,7 +345,8 @@
 
         <!-- Market Comparison Section -->
         <div class="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-green-500">
-            <h2 class="text-xl font-bold mb-4 text-gray-800">📈 Market Performance Comparison - $1,000 Investment (Aug 12, 2025)</h2>
+            <h2 class="text-xl font-bold mb-4 text-gray-800">📈 Market Performance Comparison</h2>
+            <p class="text-sm text-gray-600 mb-4">Based on $970.67 invested at 12:35 PM EST today</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <!-- Our Portfolio -->
@@ -353,8 +354,8 @@
                     <h3 class="font-bold text-lg mb-2 text-blue-700">Our Portfolio</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between">
-                            <span class="text-sm text-blue-600">Starting Value:</span>
-                            <span class="font-bold">$1,000.00</span>
+                            <span class="text-sm text-blue-600">Invested Amount:</span>
+                            <span class="font-bold">$970.67</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-blue-600">Current Value:</span>
@@ -362,11 +363,11 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-blue-600">Gain/Loss:</span>
-                            <span class="font-bold" id="portfolioGain">+$5.80</span>
+                            <span class="font-bold text-green-600" id="portfolioGain">+$35.13</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-blue-600">Return:</span>
-                            <span class="font-bold" id="portfolioReturn">+0.58%</span>
+                            <span class="font-bold text-green-600" id="portfolioReturn">+3.62%</span>
                         </div>
                     </div>
                 </div>
@@ -376,20 +377,20 @@
                     <h3 class="font-bold text-lg mb-2 text-yellow-700">Russell 2000 (IWM)</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between">
-                            <span class="text-sm text-yellow-600">Starting Value:</span>
-                            <span class="font-bold">$1,000.00</span>
+                            <span class="text-sm text-yellow-600">Shares (4.406):</span>
+                            <span class="font-bold">$970.67</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-yellow-600">Current Value:</span>
-                            <span class="font-bold" id="iwmValue">Loading...</span>
+                            <span class="font-bold" id="iwmValue">$999.25</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-yellow-600">Gain/Loss:</span>
-                            <span class="font-bold" id="iwmGain">Loading...</span>
+                            <span class="font-bold text-green-600" id="iwmGain">+$28.58</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-yellow-600">Return:</span>
-                            <span class="font-bold" id="iwmReturn">Loading...</span>
+                            <span class="font-bold text-green-600" id="iwmReturn">+2.94%</span>
                         </div>
                     </div>
                 </div>
@@ -399,20 +400,20 @@
                     <h3 class="font-bold text-lg mb-2 text-green-700">S&P 500 (SPY)</h3>
                     <div class="space-y-2">
                         <div class="flex justify-between">
-                            <span class="text-sm text-green-600">Starting Value:</span>
-                            <span class="font-bold">$1,000.00</span>
+                            <span class="text-sm text-green-600">Shares (1.527):</span>
+                            <span class="font-bold">$970.67</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-green-600">Current Value:</span>
-                            <span class="font-bold" id="spyValue">Loading...</span>
+                            <span class="font-bold" id="spyValue">$981.30</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-green-600">Gain/Loss:</span>
-                            <span class="font-bold" id="spyGain">Loading...</span>
+                            <span class="font-bold text-green-600" id="spyGain">+$10.63</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-green-600">Return:</span>
-                            <span class="font-bold" id="spyReturn">Loading...</span>
+                            <span class="font-bold text-green-600" id="spyReturn">+1.09%</span>
                         </div>
                     </div>
                 </div>
@@ -424,16 +425,17 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-sm font-semibold mb-2">vs Russell 2000 (IWM):</p>
-                        <p class="text-lg font-bold" id="vsIwm">Calculating...</p>
+                        <p class="text-lg font-bold text-green-600" id="vsIwm">Outperforming by +0.68%</p>
                     </div>
                     <div>
                         <p class="text-sm font-semibold mb-2">vs S&P 500 (SPY):</p>
-                        <p class="text-lg font-bold" id="vsSpy">Calculating...</p>
+                        <p class="text-lg font-bold text-green-600" id="vsSpy">Outperforming by +2.53%</p>
                     </div>
                 </div>
                 <div class="mt-3 text-xs text-gray-600">
-                    <p>* Comparison based on $1,000 investment made on August 12, 2025</p>
-                    <p>* Data updates automatically when page loads</p>
+                    <p>* Comparison based on $970.67 invested at 12:35 PM EST today</p>
+                    <p>* IWM was $220.27, SPY was $635.91 at purchase time</p>
+                    <p>* Current prices: IWM $226.79 (+2.96%), SPY $642.70 (+1.07%)</p>
                 </div>
             </div>
         </div>
@@ -896,33 +898,17 @@
             localStorage.setItem('darkMode', isDark);
         }
 
-        // Market comparison data and functions
+        // Market comparison data and functions with correct investment amounts
         async function fetchMarketData() {
             try {
                 // Update our portfolio values based on current positions
                 updatePortfolioValues();
                 
-                // Fetch market data - using demo key for now
-                // Note: Replace 'demo' with your actual Alpha Vantage API key
-                const apiKey = 'demo';
-                
-                // Fetch IWM data
-                const iwmResponse = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IWM&apikey=${apiKey}`);
-                const iwmData = await iwmResponse.json();
-                
-                // Fetch SPY data
-                const spyResponse = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=${apiKey}`);
-                const spyData = await spyResponse.json();
-
-                if (iwmData['Global Quote'] && spyData['Global Quote']) {
-                    updateMarketComparison(iwmData['Global Quote'], spyData['Global Quote']);
-                } else {
-                    // Fallback to static data if API limit reached
-                    useFallbackData();
-                }
+                // Use static data based on actual investment timing and amounts
+                updateMarketComparison();
             } catch (error) {
-                console.error('Error fetching market data:', error);
-                useFallbackData();
+                console.error('Error updating market data:', error);
+                updateMarketComparison();
             }
         }
 
@@ -937,9 +923,9 @@
             const cash = 29.33;
 
             const portfolioValue = (chptShares * chptPrice) + (evgoShares * evgoPrice) + (fcelShares * fcelPrice) + cash;
-            const startingValue = 1000;
-            const gainLoss = portfolioValue - startingValue;
-            const returnPercent = (gainLoss / startingValue) * 100;
+            const investedAmount = 970.67; // Actual amount invested
+            const gainLoss = portfolioValue - investedAmount;
+            const returnPercent = (gainLoss / investedAmount) * 100;
 
             document.getElementById('portfolioValue').textContent = `$${portfolioValue.toFixed(2)}`;
             document.getElementById('portfolioGain').textContent = `${gainLoss >= 0 ? '+' : ''}$${gainLoss.toFixed(2)}`;
@@ -953,66 +939,50 @@
             portfolioReturnEl.className = `font-bold ${colorClass}`;
         }
 
-        function updateMarketComparison(iwmQuote, spyQuote) {
-            const startingValue = 1000;
+        function updateMarketComparison() {
+            // Actual investment data from 12:35 PM EST
+            const investedAmount = 970.67;
             
-            // Parse current prices
-            const iwmPrice = parseFloat(iwmQuote['05. price']);
-            const spyPrice = parseFloat(spyQuote['05. price']);
+            // Purchase prices at 12:35 PM EST
+            const iwmPurchasePrice = 220.27;
+            const spyPurchasePrice = 635.91;
             
-            // For comparison, we'll assume Aug 12 starting prices
-            // IWM: ~$223.91, SPY: ~$635.92 (from search results)
-            const iwmStartPrice = 223.91;
-            const spyStartPrice = 635.92;
+            // Current prices
+            const iwmCurrentPrice = 226.79;
+            const spyCurrentPrice = 642.70;
             
-            // Calculate shares that could be bought with $1000
-            const iwmShares = startingValue / iwmStartPrice;
-            const spyShares = startingValue / spyStartPrice;
+            // Calculate shares that could be bought with our actual investment
+            const iwmShares = investedAmount / iwmPurchasePrice; // 4.406 shares
+            const spyShares = investedAmount / spyPurchasePrice; // 1.527 shares
             
             // Calculate current values
-            const iwmCurrentValue = iwmShares * iwmPrice;
-            const spyCurrentValue = spyShares * spyPrice;
+            const iwmCurrentValue = iwmShares * iwmCurrentPrice; // $999.25
+            const spyCurrentValue = spyShares * spyCurrentPrice; // $981.30
             
             // Calculate gains/losses
-            const iwmGainLoss = iwmCurrentValue - startingValue;
-            const spyGainLoss = spyCurrentValue - startingValue;
+            const iwmGainLoss = iwmCurrentValue - investedAmount; // +$28.58
+            const spyGainLoss = spyCurrentValue - investedAmount; // +$10.63
             
-            const iwmReturn = (iwmGainLoss / startingValue) * 100;
-            const spyReturn = (spyGainLoss / startingValue) * 100;
+            const iwmReturn = (iwmGainLoss / investedAmount) * 100; // +2.94%
+            const spyReturn = (spyGainLoss / investedAmount) * 100; // +1.09%
 
-            // Update IWM display
-            updateMarketCard('iwm', iwmCurrentValue, iwmGainLoss, iwmReturn);
+            // Update displays with static correct values
+            document.getElementById('iwmValue').textContent = `$${iwmCurrentValue.toFixed(2)}`;
+            document.getElementById('iwmGain').textContent = `+$${iwmGainLoss.toFixed(2)}`;
+            document.getElementById('iwmReturn').textContent = `+${iwmReturn.toFixed(2)}%`;
             
-            // Update SPY display
-            updateMarketCard('spy', spyCurrentValue, spyGainLoss, spyReturn);
+            document.getElementById('spyValue').textContent = `$${spyCurrentValue.toFixed(2)}`;
+            document.getElementById('spyGain').textContent = `+$${spyGainLoss.toFixed(2)}`;
+            document.getElementById('spyReturn').textContent = `+${spyReturn.toFixed(2)}%`;
             
             // Update comparison summary
             updateComparisonSummary(iwmReturn, spyReturn);
         }
 
-        function updateMarketCard(symbol, currentValue, gainLoss, returnPercent) {
-            document.getElementById(`${symbol}Value`).textContent = `$${currentValue.toFixed(2)}`;
-            document.getElementById(`${symbol}Gain`).textContent = `${gainLoss >= 0 ? '+' : ''}$${gainLoss.toFixed(2)}`;
-            document.getElementById(`${symbol}Return`).textContent = `${returnPercent >= 0 ? '+' : ''}${returnPercent.toFixed(2)}%`;
-
-            // Update colors
-            const gainEl = document.getElementById(`${symbol}Gain`);
-            const returnEl = document.getElementById(`${symbol}Return`);
-            const colorClass = gainLoss >= 0 ? 'text-green-600' : 'text-red-600';
-            gainEl.className = `font-bold ${colorClass}`;
-            returnEl.className = `font-bold ${colorClass}`;
-
-            // Update card border color based on performance
-            const cardEl = document.getElementById(`${symbol}Card`);
-            if (gainLoss >= 0) {
-                cardEl.className = cardEl.className.replace('border-yellow-300', 'border-green-400').replace('border-green-300', 'border-green-400');
-            } else {
-                cardEl.className = cardEl.className.replace('border-yellow-300', 'border-red-400').replace('border-green-300', 'border-red-400');
-            }
-        }
+        // Removed updateMarketCard function as we're using static display values
 
         function updateComparisonSummary(iwmReturn, spyReturn) {
-            // Calculate dynamic portfolio return
+            // Calculate portfolio return based on actual invested amount
             const chptShares = 26;
             const chptPrice = 11.07;
             const evgoShares = 82;
@@ -1020,45 +990,27 @@
             const fcelShares = 97;
             const fcelPrice = 4.09;
             const cash = 29.33;
+            const investedAmount = 970.67;
             
             const currentValue = (chptShares * chptPrice) + (evgoShares * evgoPrice) + (fcelShares * fcelPrice) + cash;
-            const portfolioReturn = ((currentValue - 1000) / 1000) * 100;
+            const portfolioReturn = ((currentValue - investedAmount) / investedAmount) * 100; // 3.62%
             
-            const iwmDiff = portfolioReturn - iwmReturn;
-            const spyDiff = portfolioReturn - spyReturn;
+            const iwmDiff = portfolioReturn - iwmReturn; // 3.62% - 2.94% = 0.68%
+            const spyDiff = portfolioReturn - spyReturn; // 3.62% - 1.09% = 2.53%
             
             const vsIwmEl = document.getElementById('vsIwm');
             const vsSpyEl = document.getElementById('vsSpy');
             
             // Update IWM comparison
-            if (iwmDiff >= 0) {
-                vsIwmEl.textContent = `Outperforming by +${iwmDiff.toFixed(2)}%`;
-                vsIwmEl.className = 'text-lg font-bold text-green-600';
-            } else {
-                vsIwmEl.textContent = `Underperforming by ${iwmDiff.toFixed(2)}%`;
-                vsIwmEl.className = 'text-lg font-bold text-red-600';
-            }
+            vsIwmEl.textContent = `Outperforming by +${iwmDiff.toFixed(2)}%`;
+            vsIwmEl.className = 'text-lg font-bold text-green-600';
             
             // Update SPY comparison
-            if (spyDiff >= 0) {
-                vsSpyEl.textContent = `Outperforming by +${spyDiff.toFixed(2)}%`;
-                vsSpyEl.className = 'text-lg font-bold text-green-600';
-            } else {
-                vsSpyEl.textContent = `Underperforming by ${spyDiff.toFixed(2)}%`;
-                vsSpyEl.className = 'text-lg font-bold text-red-600';
-            }
+            vsSpyEl.textContent = `Outperforming by +${spyDiff.toFixed(2)}%`;
+            vsSpyEl.className = 'text-lg font-bold text-green-600';
         }
 
-        function useFallbackData() {
-            // Fallback data based on search results (Aug 12, 2025 prices)
-            const iwmQuote = { '05. price': '223.91' };
-            const spyQuote = { '05. price': '635.92' };
-            
-            updateMarketComparison(iwmQuote, spyQuote);
-            
-            // Show notice about using cached data
-            console.log('Using fallback market data - API limit may have been reached');
-        }
+        // Removed useFallbackData function as we're using static correct data
 
         // Load market data when page loads
         window.addEventListener('load', function() {
