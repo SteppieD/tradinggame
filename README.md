@@ -1,8 +1,10 @@
-# 🎯 Trading Game - $1000 Small-Cap Challenge
+# 🎯 AI Trading Assistant - Powered by Claude Code
 
 [![YouTube Channel](https://img.shields.io/badge/YouTube-AI%20Business%20Lab-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@aibusiness-lab)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Built with Claude](https://img.shields.io/badge/Built%20with-Claude%20AI-purple?style=for-the-badge)](https://claude.ai)
+
+**Build your own AI-powered trading system with Claude Code's specialized agents!**
 
 ## 📺 Follow the Journey
 
@@ -81,23 +83,20 @@ Every trade automatically captures IWM and SPY prices for real-time performance 
 - Shows if you're beating the market (alpha)
 - Updates dashboard with live comparison
 
-## 🚀 Quick Start
+## 🚀 Quick Start (5 Minutes)
 
-1. **Clone the repo**
+### Automated Setup
 ```bash
+# Clone and setup
 git clone https://github.com/SteppieD/tradinggame.git
 cd tradinggame
+python setup.py  # Interactive setup wizard
 ```
 
-2. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-3. **View the dashboard**
-```bash
-open dashboard.html
-```
+### Quick Links
+- **⚡ [QUICK_START.md](QUICK_START.md)** - Get trading in 5 minutes
+- **📖 [SETUP.md](SETUP.md)** - Complete setup guide  
+- **🤖 [CLAUDE_AGENTS.md](CLAUDE_AGENTS.md)** - AI agent documentation
 
 ## 📁 Project Structure
 
