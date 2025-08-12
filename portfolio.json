@@ -1,0 +1,24 @@
+{
+  "cash_balance": 29.33,
+  "starting_balance": 1000.0,
+  "positions": [
+    {
+      "symbol": "CHPT",
+      "quantity": 26,
+      "entry_price": 10.7845,
+      "current_price": 10.7845
+    },
+    {
+      "symbol": "EVGO", 
+      "quantity": 82,
+      "entry_price": 3.6271,
+      "current_price": 3.6271
+    },
+    {
+      "symbol": "FCEL",
+      "quantity": 97,
+      "entry_price": 4.05,
+      "current_price": 4.05
+    }
+  ]
+}

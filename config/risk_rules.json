@@ -1,0 +1,32 @@
+{
+  "position_sizing": {
+    "max_position_size_percent": 10,
+    "max_portfolio_allocation": 0.95,
+    "min_position_size_dollars": 50,
+    "max_position_size_dollars": 200
+  },
+  "stop_loss": {
+    "default_stop_loss_percent": 10,
+    "trailing_stop_loss_percent": 8,
+    "max_daily_loss_percent": 5,
+    "max_weekly_loss_percent": 10
+  },
+  "entry_criteria": {
+    "min_market_cap_millions": 50,
+    "max_market_cap_billions": 2,
+    "min_average_volume": 100000,
+    "min_price": 1,
+    "max_price": 100
+  },
+  "diversification": {
+    "max_sector_concentration_percent": 30,
+    "max_correlated_positions": 3,
+    "min_positions": 5,
+    "max_positions": 20
+  },
+  "congressional_signals": {
+    "follow_threshold_days": 2,
+    "min_purchase_amount": 15000,
+    "trusted_politicians": ["Nancy Pelosi", "Dan Crenshaw", "Austin Scott", "Brian Mast"]
+  }
+}

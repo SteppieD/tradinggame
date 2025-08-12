@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Personal/Sensitive Data
+data/executions/
+data/portfolio.json
+data/stop_losses.json
+data/congressional/
+data/cache/
+orders/*.json
+reports/daily/
+reports/executions/
+
+# API Keys and Config
+.env
+config/api_keys.json
+config/credentials.json
+
+# Trading Data (keep structure but not data)
+data/performance_history.json
+data/research_analysis.json
+data/screening_results.json
+data/trades_history.csv
+
+# Analysis Results  
+analysis/
+
+# MacOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node (for trading-app)
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Keep templates but not actual trades
+!orders/TEMPLATE.json
+!data/TEMPLATE.json

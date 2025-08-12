@@ -1,0 +1,25 @@
+{
+  "stop_losses": [
+    {
+      "symbol": "CHPT",
+      "stop_price": 9.70,
+      "limit_price": 9.65,
+      "quantity": 26,
+      "status": "active"
+    },
+    {
+      "symbol": "EVGO",
+      "stop_price": 3.26,
+      "limit_price": 3.24,
+      "quantity": 82,
+      "status": "active"
+    },
+    {
+      "symbol": "FCEL",
+      "stop_price": 3.65,
+      "limit_price": 3.63,
+      "quantity": 97,
+      "status": "active"
+    }
+  ]
+}

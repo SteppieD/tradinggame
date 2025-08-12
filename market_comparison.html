@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Market Comparison</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #00ff41;
+        }
+        #chart {
+            width: 100%;
+            height: 500px;
+        }
+        .summary {
+            text-align: center;
+            margin: 20px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio vs Market Performance</h1>
+    <div id="chart"></div>
+    <div class="summary">
+        <h2>Performance Summary</h2>
+        <p>Portfolio Return: 0.0%</p>
+        <p>S&P 500 Return: 1.8%</p>
+        <p>Russell 2000 Return: -1.3%</p>
+    </div>
+    
+    <script>
+        var portfolioTrace = {
+            x: [0],
+            y: [0.0],
+            type: 'scatter',
+            name: 'Portfolio',
+            line: {color: '#00ff41', width: 3}
+        };
+        
+        var spyTrace = {
+            x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            y: [np.float64(0.0), np.float64(-0.4273271747553764), np.float64(-0.09443300487735895), np.float64(0.5169540310447918), np.float64(0.443337901453833), np.float64(0.6337961921431878), np.float64(0.6481951007176301), np.float64(1.504461268352375), np.float64(1.5380652340892365), np.float64(1.9669944583739163), np.float64(1.94139097168895), np.float64(1.6725104028207038), np.float64(1.5444734322064946), np.float64(1.163556850827785), np.float64(-0.49455464341845445), np.float64(1.0179071039858156), np.float64(0.5057494529342677), np.float64(1.2755928633382485), np.float64(1.190762387042077), np.float64(1.9798010860137438), np.float64(1.778138217213887)],
+            type: 'scatter',
+            name: 'S&P 500',
+            line: {color: '#00b4d8', width: 2}
+        };
+        
+        var iwmTrace = {
+            x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            y: [np.float64(0.0), np.float64(-1.9579708183097289), np.float64(-0.972264951480073), np.float64(0.3270736679751973), np.float64(-0.3853221922775596), np.float64(-0.7885701628087327), np.float64(0.03584471982596149), np.float64(1.5636857369053736), np.float64(0.16129782087621614), np.float64(0.5331790978041928), np.float64(0.4166820491994905), np.float64(-0.22402437140134346), np.float64(-0.7303216385063815), np.float64(-1.7025865899864545), np.float64(-3.7053650172489516), np.float64(-1.550251658237034), np.float64(-1.0484324173547832), np.float64(-1.1783703813090574), np.float64(-1.5009660230614896), np.float64(-1.2858977041056985), np.float64(-1.3083015085820882)],
+            type: 'scatter',
+            name: 'Russell 2000',
+            line: {color: '#f77f00', width: 2}
+        };
+        
+        var data = [portfolioTrace, spyTrace, iwmTrace];
+        
+        var layout = {
+            title: 'Cumulative Returns',
+            xaxis: {title: 'Days', color: 'white'},
+            yaxis: {title: 'Return (%)', color: 'white'},
+            plot_bgcolor: '#1a1a1a',
+            paper_bgcolor: '#0f0f0f',
+            font: {color: 'white'},
+            showlegend: true,
+            legend: {x: 0, y: 1}
+        };
+        
+        Plotly.newPlot('chart', data, layout);
+    </script>
+</body>
+</html>

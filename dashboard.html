@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard - Simple & Working</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Dark mode styles */
+        body.dark {
+            background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+            min-height: 100vh;
+        }
+        
+        body.dark .bg-white {
+            background-color: #1f1f1f !important;
+            border: 1px solid #333;
+        }
+        
+        body.dark .bg-gray-50 {
+            background-color: #2a2a2a !important;
+        }
+        
+        body.dark .bg-gray-100 {
+            background-color: #0f0f0f !important;
+        }
+        
+        body.dark .text-gray-600 {
+            color: #9ca3af !important;
+        }
+        
+        body.dark .text-gray-500 {
+            color: #9ca3af !important;
+        }
+        
+        body.dark h1 {
+            color: #f3f4f6 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        body.dark h2 {
+            color: #e5e7eb !important;
+        }
+        
+        body.dark h3 {
+            color: #d1d5db !important;
+        }
+        
+        body.dark p, body.dark td, body.dark th {
+            color: #f3f4f6 !important;
+        }
+        
+        body.dark .text-sm {
+            color: #d1d5db !important;
+        }
+        
+        /* Make small text in colored boxes even brighter */
+        body.dark .bg-red-50 p,
+        body.dark .bg-green-50 p,
+        body.dark .bg-yellow-50 p,
+        body.dark .bg-blue-50 p,
+        body.dark .bg-yellow-100 p {
+            color: #f9fafb !important;
+        }
+        
+        body.dark .bg-red-50 .text-sm,
+        body.dark .bg-green-50 .text-sm,
+        body.dark .bg-yellow-50 .text-sm,
+        body.dark .bg-blue-50 .text-sm,
+        body.dark .bg-yellow-100 .text-sm {
+            color: #e5e7eb !important;
+        }
+        
+        body.dark .border-b {
+            border-bottom-color: #374151 !important;
+        }
+        
+        body.dark .hover\:bg-gray-50:hover {
+            background-color: #374151 !important;
+        }
+        
+        body.dark .shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Make colored text pop in dark mode */
+        body.dark .text-green-600 {
+            color: #10b981 !important;
+        }
+        
+        body.dark .text-red-600 {
+            color: #ef4444 !important;
+        }
+        
+        body.dark .bg-yellow-100 {
+            background-color: #451a03 !important;
+            border: 1px solid #f59e0b !important;
+        }
+        
+        body.dark .text-yellow-800 {
+            color: #fbbf24 !important;
+        }
+        
+        /* Fix dark mode colored backgrounds - much lighter */
+        body.dark .bg-red-50 {
+            background-color: #450a0a !important;
+            border: 1px solid #dc2626 !important;
+        }
+        
+        body.dark .bg-green-50 {
+            background-color: #052e16 !important;
+            border: 1px solid #16a34a !important;
+        }
+        
+        body.dark .bg-yellow-50 {
+            background-color: #422006 !important;
+            border: 1px solid #ca8a04 !important;
+        }
+        
+        body.dark .bg-blue-50 {
+            background-color: #172554 !important;
+            border: 1px solid #2563eb !important;
+        }
+        
+        body.dark .text-green-700 {
+            color: #86efac !important;
+        }
+        
+        body.dark .text-yellow-700 {
+            color: #fde047 !important;
+        }
+        
+        body.dark .text-blue-700 {
+            color: #93c5fd !important;
+        }
+        
+        body.dark .text-blue-600 {
+            color: #3b82f6 !important;
+        }
+        
+        body.dark .border-blue-500 {
+            border-color: #60a5fa !important;
+        }
+        
+        body.dark .border-green-300 {
+            border-color: #4ade80 !important;
+        }
+        
+        body.dark .border-yellow-300 {
+            border-color: #fbbf24 !important;
+        }
+        
+        body.dark .border-blue-300 {
+            border-color: #60a5fa !important;
+        }
+        
+        body.dark .border-red-300 {
+            border-color: #f87171 !important;
+        }
+        
+        body.dark .border-yellow-400 {
+            border-color: #fbbf24 !important;
+        }
+        
+        /* Position Management Tracker Dark Mode Fixes */
+        body.dark .bg-red-100 {
+            background-color: #7f1d1d !important;
+            border: 2px solid #ef4444 !important;
+        }
+        
+        body.dark .bg-red-100 p,
+        body.dark .bg-red-100 .text-red-700 {
+            color: #fca5a5 !important;
+            font-weight: bold;
+        }
+        
+        body.dark .bg-green-100 {
+            background-color: #14532d !important;
+            border: 2px solid #4ade80 !important;
+        }
+        
+        body.dark .bg-green-100 p,
+        body.dark .bg-green-100 .text-green-700 {
+            color: #86efac !important;
+            font-weight: bold;
+        }
+        
+        body.dark .bg-yellow-100 {
+            background-color: #713f12 !important;
+            border: 2px solid #fbbf24 !important;
+        }
+        
+        body.dark .bg-yellow-100 p,
+        body.dark .bg-yellow-100 .text-yellow-700 {
+            color: #fde047 !important;
+            font-weight: bold;
+        }
+        
+        body.dark .bg-blue-100 {
+            background-color: #1e3a8a !important;
+            border: 2px solid #60a5fa !important;
+        }
+        
+        body.dark .bg-blue-100 p,
+        body.dark .bg-blue-100 .text-blue-700 {
+            color: #93c5fd !important;
+            font-weight: bold;
+        }
+        
+        body.dark .bg-gray-100 {
+            background-color: #374151 !important;
+            border: 2px solid #6b7280 !important;
+        }
+        
+        body.dark .bg-gray-100 p {
+            color: #e5e7eb !important;
+        }
+        
+        body.dark .border-purple-500 {
+            border-color: #a78bfa !important;
+        }
+        
+        /* Toggle switch styles */
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 28px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "☀️";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            transition: .4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #1e40af;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(32px);
+            content: "🌙";
+        }
+        
+        /* Enhanced heading styles */
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        body.dark h1 {
+            background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 transition-colors duration-300">
+    <div class="container mx-auto p-4 max-w-6xl">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Trading Dashboard - August 12, 2025</h1>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-600 font-medium">Dark Mode</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Portfolio Overview Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-lg shadow transition-all hover:shadow-lg">
+                <h3 class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Portfolio Value</h3>
+                <p class="text-2xl font-bold mt-1">$997.48</p>
+                <p class="text-sm text-red-600 font-medium">-0.25%</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow transition-all hover:shadow-lg">
+                <h3 class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Cash Available</h3>
+                <p class="text-2xl font-bold mt-1">$29.33</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow transition-all hover:shadow-lg">
+                <h3 class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Open Positions</h3>
+                <p class="text-2xl font-bold mt-1">3</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow transition-all hover:shadow-lg">
+                <h3 class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Total P&L</h3>
+                <p class="text-2xl font-bold text-red-600 mt-1">-$2.52</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow transition-all hover:shadow-lg">
+                <h3 class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Risk Exposure</h3>
+                <p class="text-2xl font-bold text-red-600 mt-1">$97.74</p>
+            </div>
+        </div>
+
+        <!-- Current Positions -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Current Positions</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b bg-gray-50">
+                            <th class="text-left p-3 font-semibold">Symbol</th>
+                            <th class="text-right p-3 font-semibold">Shares</th>
+                            <th class="text-right p-3 font-semibold">Entry Price</th>
+                            <th class="text-right p-3 font-semibold">Current Price</th>
+                            <th class="text-right p-3 font-semibold">Market Value</th>
+                            <th class="text-right p-3 font-semibold">P&L</th>
+                            <th class="text-right p-3 font-semibold">P&L %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">CHPT</td>
+                            <td class="p-3 text-right">26</td>
+                            <td class="p-3 text-right">$10.7845</td>
+                            <td class="p-3 text-right">$10.71</td>
+                            <td class="p-3 text-right">$278.46</td>
+                            <td class="p-3 text-right text-red-600 font-medium">-$1.94</td>
+                            <td class="p-3 text-right text-red-600 font-medium">-0.69%</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">EVGO</td>
+                            <td class="p-3 text-right">82</td>
+                            <td class="p-3 text-right">$3.6271</td>
+                            <td class="p-3 text-right">$3.62</td>
+                            <td class="p-3 text-right">$296.84</td>
+                            <td class="p-3 text-right text-red-600 font-medium">-$0.58</td>
+                            <td class="p-3 text-right text-red-600 font-medium">-0.20%</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">FCEL</td>
+                            <td class="p-3 text-right">97</td>
+                            <td class="p-3 text-right">$4.05</td>
+                            <td class="p-3 text-right">$4.05</td>
+                            <td class="p-3 text-right">$392.85</td>
+                            <td class="p-3 text-right text-gray-500 font-medium">$0.00</td>
+                            <td class="p-3 text-right text-gray-500 font-medium">0.00%</td>
+                        </tr>
+                        <tr class="bg-gray-50 font-bold">
+                            <td class="p-3">TOTAL</td>
+                            <td class="p-3 text-right">205</td>
+                            <td class="p-3 text-right">-</td>
+                            <td class="p-3 text-right">-</td>
+                            <td class="p-3 text-right">$968.15</td>
+                            <td class="p-3 text-right text-red-600">-$2.52</td>
+                            <td class="p-3 text-right text-red-600">-0.26%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Stop-Loss Orders -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Active Stop-Loss Orders (Place Daily at 6:30 AM PST)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b bg-gray-50">
+                            <th class="text-left p-3 font-semibold">Symbol</th>
+                            <th class="text-right p-3 font-semibold">Qty</th>
+                            <th class="text-right p-3 font-semibold">Stop Price</th>
+                            <th class="text-right p-3 font-semibold">Limit Price</th>
+                            <th class="text-right p-3 font-semibold">Current</th>
+                            <th class="text-right p-3 font-semibold">Distance</th>
+                            <th class="text-center p-3 font-semibold">Order Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">CHPT</td>
+                            <td class="p-3 text-right">26</td>
+                            <td class="p-3 text-right">$9.70</td>
+                            <td class="p-3 text-right">$9.65</td>
+                            <td class="p-3 text-right">$10.71</td>
+                            <td class="p-3 text-right text-green-600 font-medium">9.4%</td>
+                            <td class="p-3 text-center">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-semibold">DAY ORDER</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">EVGO</td>
+                            <td class="p-3 text-right">82</td>
+                            <td class="p-3 text-right">$3.26</td>
+                            <td class="p-3 text-right">$3.24</td>
+                            <td class="p-3 text-right">$3.62</td>
+                            <td class="p-3 text-right text-green-600 font-medium">9.9%</td>
+                            <td class="p-3 text-center">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-semibold">DAY ORDER</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3 font-bold">FCEL</td>
+                            <td class="p-3 text-right">97</td>
+                            <td class="p-3 text-right">$3.65</td>
+                            <td class="p-3 text-right">$3.63</td>
+                            <td class="p-3 text-right">$4.05</td>
+                            <td class="p-3 text-right text-green-600 font-medium">9.9%</td>
+                            <td class="p-3 text-center">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-semibold">DAY ORDER</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Today's Executions -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Today's Executions</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b bg-gray-50">
+                            <th class="text-left p-3 font-semibold">Time</th>
+                            <th class="text-left p-3 font-semibold">Symbol</th>
+                            <th class="text-left p-3 font-semibold">Action</th>
+                            <th class="text-right p-3 font-semibold">Shares</th>
+                            <th class="text-right p-3 font-semibold">Price</th>
+                            <th class="text-right p-3 font-semibold">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3">12:35 PM</td>
+                            <td class="p-3 font-bold">CHPT</td>
+                            <td class="p-3"><span class="text-green-600 font-semibold">BUY</span></td>
+                            <td class="p-3 text-right">26</td>
+                            <td class="p-3 text-right">$10.7845</td>
+                            <td class="p-3 text-right">$280.40</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3">12:36 PM</td>
+                            <td class="p-3 font-bold">EVGO</td>
+                            <td class="p-3"><span class="text-green-600 font-semibold">BUY</span></td>
+                            <td class="p-3 text-right">82</td>
+                            <td class="p-3 text-right">$3.6271</td>
+                            <td class="p-3 text-right">$297.42</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50 transition-colors">
+                            <td class="p-3">12:37 PM</td>
+                            <td class="p-3 font-bold">FCEL</td>
+                            <td class="p-3"><span class="text-green-600 font-semibold">BUY</span></td>
+                            <td class="p-3 text-right">97</td>
+                            <td class="p-3 text-right">$4.05</td>
+                            <td class="p-3 text-right">$392.85</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Account Summary -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Account Summary</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <p class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Starting Balance</p>
+                    <p class="font-bold text-lg mt-1">$1,000.00</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Total Invested</p>
+                    <p class="font-bold text-lg mt-1">$970.67</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Commission Paid</p>
+                    <p class="font-bold text-lg mt-1">$20.85</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 font-semibold uppercase tracking-wider">Broker</p>
+                    <p class="font-bold text-lg mt-1">CIBC Investor's Edge (TFSA)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Position Management Tracker -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-purple-500">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">🎯 Position Management Tracker - Watch These Numbers!</h2>
+            
+            <!-- CHPT Management -->
+            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                <h3 class="font-bold text-lg mb-2">CHPT - ChargePoint</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <p class="text-xs text-gray-600">Entry Price</p>
+                        <p class="font-bold">$10.78</p>
+                    </div>
+                    <div class="bg-red-100 p-2 rounded border border-red-300">
+                        <p class="text-xs text-red-600">Stop Loss</p>
+                        <p class="font-bold text-red-700">$9.70</p>
+                    </div>
+                    <div class="bg-yellow-100 p-2 rounded border border-yellow-300">
+                        <p class="text-xs text-yellow-700">Move Stop to B/E</p>
+                        <p class="font-bold text-yellow-700">$11.32</p>
+                        <p class="text-xs">(+5%)</p>
+                    </div>
+                    <div class="bg-green-100 p-2 rounded border border-green-300">
+                        <p class="text-xs text-green-700">Trail Stop</p>
+                        <p class="font-bold text-green-700">$11.86</p>
+                        <p class="text-xs">(+10%)</p>
+                    </div>
+                    <div class="bg-blue-100 p-2 rounded border border-blue-300">
+                        <p class="text-xs text-blue-700">Take Profits</p>
+                        <p class="font-bold text-blue-700">$12.40</p>
+                        <p class="text-xs">(+15%)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- EVGO Management -->
+            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                <h3 class="font-bold text-lg mb-2">EVGO - EVgo Inc.</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <p class="text-xs text-gray-600">Entry Price</p>
+                        <p class="font-bold">$3.63</p>
+                    </div>
+                    <div class="bg-red-100 p-2 rounded border border-red-300">
+                        <p class="text-xs text-red-600">Stop Loss</p>
+                        <p class="font-bold text-red-700">$3.26</p>
+                    </div>
+                    <div class="bg-yellow-100 p-2 rounded border border-yellow-300">
+                        <p class="text-xs text-yellow-700">Move Stop to B/E</p>
+                        <p class="font-bold text-yellow-700">$3.81</p>
+                        <p class="text-xs">(+5%)</p>
+                    </div>
+                    <div class="bg-green-100 p-2 rounded border border-green-300">
+                        <p class="text-xs text-green-700">Trail Stop</p>
+                        <p class="font-bold text-green-700">$3.99</p>
+                        <p class="text-xs">(+10%)</p>
+                    </div>
+                    <div class="bg-blue-100 p-2 rounded border border-blue-300">
+                        <p class="text-xs text-blue-700">Take Profits</p>
+                        <p class="font-bold text-blue-700">$4.17</p>
+                        <p class="text-xs">(+15%)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FCEL Management -->
+            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                <h3 class="font-bold text-lg mb-2">FCEL - FuelCell Energy</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <p class="text-xs text-gray-600">Entry Price</p>
+                        <p class="font-bold">$4.05</p>
+                    </div>
+                    <div class="bg-red-100 p-2 rounded border border-red-300">
+                        <p class="text-xs text-red-600">Stop Loss</p>
+                        <p class="font-bold text-red-700">$3.65</p>
+                    </div>
+                    <div class="bg-yellow-100 p-2 rounded border border-yellow-300">
+                        <p class="text-xs text-yellow-700">Move Stop to B/E</p>
+                        <p class="font-bold text-yellow-700">$4.25</p>
+                        <p class="text-xs">(+5%)</p>
+                    </div>
+                    <div class="bg-green-100 p-2 rounded border border-green-300">
+                        <p class="text-xs text-green-700">Trail Stop</p>
+                        <p class="font-bold text-green-700">$4.46</p>
+                        <p class="text-xs">(+10%)</p>
+                    </div>
+                    <div class="bg-blue-100 p-2 rounded border border-blue-300">
+                        <p class="text-xs text-blue-700">Take Profits</p>
+                        <p class="font-bold text-blue-700">$4.66</p>
+                        <p class="text-xs">(+15%)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Action Guide -->
+            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-400">
+                <h3 class="font-bold mb-2">⚡ Quick Action Guide</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="font-semibold">If Price Hits:</p>
+                        <ul class="mt-1 space-y-1">
+                            <li>🔴 <span class="text-red-600 font-bold">Red Number</span> = Stop triggers, position closes</li>
+                            <li>🟡 <span class="text-yellow-600 font-bold">Yellow Number</span> = Move stop to entry price</li>
+                            <li>🟢 <span class="text-green-600 font-bold">Green Number</span> = Trail stop 5% below</li>
+                            <li>🔵 <span class="text-blue-600 font-bold">Blue Number</span> = Consider selling 25-50%</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Current Status:</p>
+                        <ul class="mt-1 space-y-1">
+                            <li>📊 Portfolio: 97% invested</li>
+                            <li>💵 Cash: $29.33 (wait for exits)</li>
+                            <li>🎯 Mode: Position management only</li>
+                            <li>⏰ Check: Every 30-60 minutes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tomorrow's Trading Plan -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-blue-500">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">📅 Tomorrow's Action Plan - August 13, 2025</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Morning Routine -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-blue-600">🌅 Morning Routine (PST)</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <div>
+                                <p class="font-semibold">6:25 AM - Pre-Market Check</p>
+                                <p class="text-sm text-gray-600">Check futures, news, pre-market prices</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <div>
+                                <p class="font-semibold">6:30 AM - Place Stop-Loss Orders</p>
+                                <p class="text-sm text-gray-600">Set DAY orders in CIBC app</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <div>
+                                <p class="font-semibold">6:35 AM - Review Positions</p>
+                                <p class="text-sm text-gray-600">Check overnight news on CHPT, EVGO, FCEL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stop-Loss Orders to Place -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-red-600">🛑 Stop-Loss Orders to Place</h3>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-300">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left">
+                                    <th>Stock</th>
+                                    <th>Stop</th>
+                                    <th>Limit</th>
+                                    <th>Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-white">
+                                    <td class="font-bold">CHPT</td>
+                                    <td>$9.70</td>
+                                    <td>$9.65</td>
+                                    <td>26</td>
+                                </tr>
+                                <tr class="text-white">
+                                    <td class="font-bold">EVGO</td>
+                                    <td>$3.26</td>
+                                    <td>$3.24</td>
+                                    <td>82</td>
+                                </tr>
+                                <tr class="text-white">
+                                    <td class="font-bold">FCEL</td>
+                                    <td>$3.65</td>
+                                    <td>$3.63</td>
+                                    <td>97</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-xs mt-2 text-yellow-600 font-bold">⚠️ Use "DAY" order expiry, not GTC</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t">
+                <h3 class="font-bold text-lg mb-3">📊 Position Management Rules</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-300">
+                        <p class="font-bold text-green-700">If Stock Up 5%+</p>
+                        <p class="text-sm mt-1">Move stop to break-even</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-300">
+                        <p class="font-bold text-yellow-700">If Stock Up 10%+</p>
+                        <p class="text-sm mt-1">Trail stop 5% below high</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-300">
+                        <p class="font-bold text-blue-700">If Stock Up 15%+</p>
+                        <p class="text-sm mt-1">Consider taking partial profits</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t">
+                <h3 class="font-bold text-lg mb-3">🎯 Watch List & Targets</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-semibold mb-2">Profit Targets:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>CHPT: First target $12.50 (+16%)</li>
+                            <li>EVGO: First target $4.25 (+17%)</li>
+                            <li>FCEL: First target $5.50 (+36%)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">Also Watching:</p>
+                        <ul class="text-sm space-y-1">
+                            <li>OUST - Wait for pullback to $25-27</li>
+                            <li>Monitor clean energy sector news</li>
+                            <li>Check for earnings announcements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 bg-yellow-100 p-4 rounded-lg border border-yellow-400">
+                <p class="text-sm font-semibold">⏰ Market Hours Reminder:</p>
+                <p class="text-sm">Market Open: 6:30 AM PST | Market Close: 1:00 PM PST</p>
+                <p class="text-sm">Mid-day Check: 9:30 AM PST | Final Hour: 12:00 PM PST</p>
+            </div>
+        </div>
+
+        <!-- Quick Notes Section -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">📝 Quick Notes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p class="font-semibold mb-2">Today's Performance:</p>
+                    <ul class="text-sm space-y-1">
+                        <li>✅ Successfully entered 3 positions</li>
+                        <li>✅ Minimal slippage on fills</li>
+                        <li>⚠️ OUST missed - up 30% (too aggressive)</li>
+                        <li>📊 Portfolio 97% invested</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">Risk Management:</p>
+                    <ul class="text-sm space-y-1">
+                        <li>Max loss if all stops hit: $97.74</li>
+                        <li>Portfolio risk: 9.8%</li>
+                        <li>Stop distance: ~10% on all positions</li>
+                        <li>Commission reserved: $20.85 for exits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            document.getElementById('darkModeToggle').checked = true;
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle('dark');
+            localStorage.setItem('darkMode', isDark);
+        }
+    </script>
+</body>
+</html>
