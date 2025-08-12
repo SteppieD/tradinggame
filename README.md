@@ -27,6 +27,11 @@ This project leverages [Claude Code](https://claude.ai/code) AI agents for:
 - **Technical Analysis** - Entry/exit signals
 - **Order Generation** - Daily trade planning
 
+### 📊 Real-Time Data Access
+- **Alpha Vantage MCP** - Live stock quotes, technical indicators, and market data
+- Use `scripts/alpha_vantage_client.py` for programmatic access
+- Real-time price updates for portfolio tracking
+
 ## 🔄 Inspired By
 
 This project is a riff on [ChatGPT Micro Cap Experiment](https://github.com/LuckyOne7777/ChatGPT-Micro-Cap-Experiment) by LuckyOne7777, adapted for:
