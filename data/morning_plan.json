@@ -1,0 +1,77 @@
+{
+  "date": "2025-08-13T12:42:44.736990",
+  "stop_orders": [
+    {
+      "symbol": "CHPT",
+      "current_price": 10.9,
+      "entry_price": 10.7845,
+      "stop_price": 10.25,
+      "limit_price": 10.19,
+      "strategy": "TIGHT_STOP",
+      "reason": "Small gain (1.1%) - tight stop at -5% from entry",
+      "pnl_percent": 1.07,
+      "distance_percent": 6.0,
+      "risk_dollars": 17.02,
+      "fib_levels": {
+        "current": 10.9,
+        "fib_236": 10.87,
+        "fib_382": 10.86,
+        "fib_500": 10.84,
+        "fib_618": 10.83,
+        "entry": 10.78,
+        "fib_786": 10.81
+      },
+      "daily_volatility": 4.5,
+      "quantity": 26
+    },
+    {
+      "symbol": "EVGO",
+      "current_price": 3.49,
+      "entry_price": 3.6271,
+      "stop_price": 3.26,
+      "limit_price": 3.25,
+      "strategy": "PROTECT_CAPITAL",
+      "reason": "Position at loss - using -10% disaster stop",
+      "pnl_percent": -3.78,
+      "distance_percent": 6.5,
+      "risk_dollars": 18.5,
+      "fib_levels": {
+        "current": 3.49,
+        "fib_236": 3.52,
+        "fib_382": 3.54,
+        "fib_500": 3.56,
+        "fib_618": 3.57,
+        "entry": 3.63,
+        "fib_786": 3.6
+      },
+      "daily_volatility": 7.2,
+      "quantity": 82
+    },
+    {
+      "symbol": "FCEL",
+      "current_price": 6.08,
+      "entry_price": 4.05,
+      "stop_price": 5.9,
+      "limit_price": 5.87,
+      "strategy": "TIGHT_TRAIL",
+      "reason": "Excellent gain (50.1%) - tight 3% trail",
+      "pnl_percent": 50.12,
+      "distance_percent": 3.0,
+      "risk_dollars": 17.69,
+      "fib_levels": {
+        "current": 6.08,
+        "fib_236": 5.6,
+        "fib_382": 5.3,
+        "fib_500": 5.06,
+        "fib_618": 4.83,
+        "entry": 4.05,
+        "fib_786": 4.48
+      },
+      "daily_volatility": 6.6,
+      "quantity": 97
+    }
+  ],
+  "portfolio_value": 1167.8200000000002,
+  "at_risk": 1159.3400000000001,
+  "risk_percent": 99.27386069771026
+}
