@@ -1,0 +1,42 @@
+{
+  "fees_summary": {
+    "total_trades": 3,
+    "fee_per_trade": 6.95,
+    "total_fees_paid": 20.85,
+    "fees_as_pct_of_investment": 2.085
+  },
+  "portfolio_performance": {
+    "gross_pnl": 76.36080000000015,
+    "gross_pnl_pct": 7.866820127804629,
+    "net_portfolio_value": 1055.51,
+    "net_return": 55.50999999999999,
+    "net_return_pct": 5.550999999999999
+  },
+  "fee_impact": {
+    "theoretical_return_without_fees": 76.3599999999999,
+    "theoretical_return_pct_without_fees": 7.63599999999999,
+    "return_lost_to_fees_pct": 2.084999999999991,
+    "fees_as_pct_of_gross_profit": 27.30458559889362
+  },
+  "trades": [
+    {
+      "date": "2025-08-12",
+      "symbol": "CHPT",
+      "type": "BUY",
+      "fee": 6.95
+    },
+    {
+      "date": "2025-08-12",
+      "symbol": "EVGO",
+      "type": "BUY",
+      "fee": 6.95
+    },
+    {
+      "date": "2025-08-12",
+      "symbol": "FCEL",
+      "type": "BUY",
+      "fee": 6.95
+    }
+  ],
+  "last_updated": "2025-08-13T10:40:26.031862"
+}

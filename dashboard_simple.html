@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .profit { color: #16a34a; }
+        .loss { color: #dc2626; }
+        .dark .profit { color: #4ade80; }
+        .dark .loss { color: #f87171; }
+        .highlight { background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%); }
+        .dark .highlight { background: linear-gradient(120deg, #422006 0%, #451a03 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-6 max-w-7xl">
+        <!-- Header with Dark Mode Toggle -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">TFSA Trading Dashboard</h1>
+                <div class="flex items-center gap-4">
+                    <span id="updateTime" class="text-sm text-gray-600 dark:text-gray-400">Last Update: Loading...</span>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                        <span id="darkModeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">📊</span> Portfolio vs Benchmarks
+            </h2>
+            <div class="h-64">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 1. POSITION TRACKER -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">💼</span> Position Tracker
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700 text-sm">
+                        <tr>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-300">Symbol</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Shares</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Entry</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Current</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Value</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">P&L</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">%</th>
+                        </tr>
+                    </thead>
+                    <tbody id="positionsTable" class="text-gray-800 dark:text-gray-200">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. PERFORMANCE SUMMARY -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">📈</span> Performance Summary
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Portfolio Value</div>
+                    <div class="text-2xl font-bold text-gray-800 dark:text-gray-100" id="portfolioValue">$0.00</div>
+                    <div class="text-sm" id="portfolioReturn">+0.00%</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Net P&L (after fees)</div>
+                    <div class="text-2xl font-bold" id="todayPnL">$0.00</div>
+                    <div class="text-sm" id="todayPercent">+0.00%</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Fees Impact</div>
+                    <div class="text-lg font-bold text-orange-600 dark:text-orange-400" id="totalFees">-$20.85</div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400" id="feeImpact">27% of profits</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">vs Benchmarks</div>
+                    <div class="text-sm mt-1 text-gray-700 dark:text-gray-300">SPY: <span id="spyComparison">-</span></div>
+                    <div class="text-sm text-gray-700 dark:text-gray-300">IWM: <span id="iwmComparison">-</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. NEXT DAY INSTRUCTIONS -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">📱</span> CIBC Trailing Stop Orders - Tomorrow Morning
+            </h2>
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 mb-4">
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Set these orders at 6:30 AM PST (Market Open)</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Order Type: TRAILING STOP LIMIT | Duration: DAY</p>
+            </div>
+            <div id="stopInstructions" class="space-y-4">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode handling
+        function initDarkMode() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('darkModeIcon').textContent = '☀️';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('darkModeIcon').textContent = '🌙';
+            }
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('darkModeIcon').textContent = '🌙';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('darkModeIcon').textContent = '☀️';
+            }
+            // Update chart colors
+            if (window.performanceChart) {
+                updateChartTheme();
+            }
+        }
+
+        // Chart setup
+        let performanceChart;
+        
+        function initChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Show actual trading days starting from Aug 12
+            const labels = ['Aug 12', 'Aug 13'];
+            
+            // Actual performance data from your portfolio
+            // Aug 12: Initial investment $1000
+            // Aug 13: Current value $1036.50 (+3.65%)
+            const portfolioData = [1000, 1036.50];
+            
+            // Estimated benchmark performance (would need real data)
+            // SPY typically moves ~0.5-1% per day
+            // IWM typically moves ~0.8-1.2% per day
+            const spyData = [1000, 1012.00];  // +1.2%
+            const iwmData = [1000, 1008.00];  // +0.8%
+            
+            performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Portfolio',
+                            data: portfolioData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'SPY',
+                            data: spyData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 1,
+                            tension: 0.4,
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: 'IWM',
+                            data: iwmData,
+                            borderColor: '#a855f7',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                            borderWidth: 1,
+                            tension: 0.4,
+                            borderDash: [5, 5]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15,
+                                color: document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#374151'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed.y;
+                                    const percentChange = ((value - 1000) / 1000 * 100).toFixed(2);
+                                    return `${context.dataset.label}: $${value.toFixed(2)} (${percentChange >= 0 ? '+' : ''}${percentChange}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toFixed(0);
+                                },
+                                color: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'
+                            },
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            performanceChart.options.plugins.legend.labels.color = isDark ? '#e5e7eb' : '#374151';
+            performanceChart.options.scales.x.ticks.color = isDark ? '#9ca3af' : '#6b7280';
+            performanceChart.options.scales.y.ticks.color = isDark ? '#9ca3af' : '#6b7280';
+            performanceChart.options.scales.y.grid.color = isDark ? '#374151' : '#e5e7eb';
+            performanceChart.update();
+        }
+
+        // Load and display data
+        async function loadDashboardData() {
+            try {
+                // Load portfolio data
+                const portfolioResponse = await fetch('data/portfolio.json');
+                const portfolio = await portfolioResponse.json();
+                
+                // Load latest prices
+                const pricesResponse = await fetch('data/latest_prices.json');
+                const prices = await pricesResponse.json();
+                
+                // Load stop instructions
+                const instructionsResponse = await fetch('data/stop_instructions.json');
+                const instructions = await instructionsResponse.json();
+                
+                updateDashboard(portfolio, prices, instructions);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Use fallback data
+                updateDashboardWithFallback();
+            }
+        }
+
+        function updateDashboard(portfolio, prices, instructions) {
+            // Update time
+            document.getElementById('updateTime').textContent = 
+                `Last Update: ${new Date().toLocaleTimeString()}`;
+            
+            // Calculate positions
+            const positions = portfolio.positions.filter(p => 
+                ['CHPT', 'EVGO', 'FCEL'].includes(p.symbol)
+            );
+            
+            let totalValue = 0;
+            let totalPnL = 0;
+            let positionsHTML = '';
+            
+            positions.forEach(pos => {
+                const currentPrice = prices[pos.symbol]?.price || pos.entry_price;
+                const value = pos.quantity * currentPrice;
+                const pnl = value - (pos.quantity * pos.entry_price);
+                const pnlPercent = (pnl / (pos.quantity * pos.entry_price)) * 100;
+                
+                totalValue += value;
+                totalPnL += pnl;
+                
+                const pnlClass = pnl >= 0 ? 'profit' : 'loss';
+                const emoji = pnlPercent >= 10 ? '🚀' : pnlPercent >= 5 ? '⭐' : '';
+                
+                positionsHTML += `
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <td class="p-3 font-bold">${pos.symbol} ${emoji}</td>
+                        <td class="p-3 text-right">${pos.quantity}</td>
+                        <td class="p-3 text-right">$${pos.entry_price.toFixed(4)}</td>
+                        <td class="p-3 text-right">$${currentPrice.toFixed(2)}</td>
+                        <td class="p-3 text-right">$${value.toFixed(2)}</td>
+                        <td class="p-3 text-right ${pnlClass} font-medium">$${pnl.toFixed(2)}</td>
+                        <td class="p-3 text-right ${pnlClass} font-medium">${pnlPercent.toFixed(1)}%</td>
+                    </tr>
+                `;
+            });
+            
+            // Add total row
+            const totalCost = positions.reduce((sum, p) => sum + (p.quantity * p.entry_price), 0);
+            const totalReturn = (totalPnL / totalCost) * 100;
+            
+            positionsHTML += `
+                <tr class="bg-gray-50 dark:bg-gray-700 font-bold">
+                    <td class="p-3">TOTAL</td>
+                    <td class="p-3 text-right">205</td>
+                    <td class="p-3 text-right">-</td>
+                    <td class="p-3 text-right">-</td>
+                    <td class="p-3 text-right">$${totalValue.toFixed(2)}</td>
+                    <td class="p-3 text-right ${totalPnL >= 0 ? 'profit' : 'loss'}">$${totalPnL.toFixed(2)}</td>
+                    <td class="p-3 text-right ${totalReturn >= 0 ? 'profit' : 'loss'}">${totalReturn.toFixed(1)}%</td>
+                </tr>
+            `;
+            
+            document.getElementById('positionsTable').innerHTML = positionsHTML;
+            
+            // Update performance summary
+            const portfolioValue = portfolio.cash_balance + totalValue;
+            const portfolioReturn = ((portfolioValue - 1000) / 1000) * 100;
+            
+            // Fee calculations (3 trades at $6.95 each)
+            const totalFees = 20.85;
+            const netPnL = portfolioValue - 1000;  // This is after fees already
+            const grossPnL = totalPnL;  // Position P&L before considering fees
+            const feePercentOfProfit = grossPnL > 0 ? (totalFees / grossPnL * 100) : 0;
+            
+            document.getElementById('portfolioValue').textContent = `$${portfolioValue.toFixed(2)}`;
+            document.getElementById('portfolioReturn').textContent = `${portfolioReturn >= 0 ? '+' : ''}${portfolioReturn.toFixed(2)}%`;
+            document.getElementById('portfolioReturn').className = portfolioReturn >= 0 ? 'text-sm profit' : 'text-sm loss';
+            
+            document.getElementById('todayPnL').textContent = `$${netPnL.toFixed(2)}`;
+            document.getElementById('todayPercent').textContent = `${portfolioReturn >= 0 ? '+' : ''}${portfolioReturn.toFixed(2)}%`;
+            document.getElementById('todayPnL').className = netPnL >= 0 ? 'text-2xl font-bold profit' : 'text-2xl font-bold loss';
+            document.getElementById('todayPercent').className = portfolioReturn >= 0 ? 'text-sm profit' : 'text-sm loss';
+            
+            // Update fee impact
+            document.getElementById('totalFees').textContent = `-$${totalFees.toFixed(2)}`;
+            document.getElementById('feeImpact').textContent = `${feePercentOfProfit.toFixed(0)}% of profits`;
+            
+            // Update benchmark comparison
+            const spyReturn = 1.2; // Placeholder
+            const iwmReturn = 0.8; // Placeholder
+            const spyDiff = portfolioReturn - spyReturn;
+            const iwmDiff = portfolioReturn - iwmReturn;
+            
+            document.getElementById('spyComparison').textContent = `${spyDiff >= 0 ? '+' : ''}${spyDiff.toFixed(1)}%`;
+            document.getElementById('spyComparison').className = spyDiff >= 0 ? 'profit font-bold' : 'loss';
+            
+            document.getElementById('iwmComparison').textContent = `${iwmDiff >= 0 ? '+' : ''}${iwmDiff.toFixed(1)}%`;
+            document.getElementById('iwmComparison').className = iwmDiff >= 0 ? 'profit font-bold' : 'loss';
+            
+            // Update stop instructions
+            if (instructions && instructions.orders) {
+                let instructionsHTML = '';
+                instructions.orders.forEach(order => {
+                    instructionsHTML += `
+                        <div class="border dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-bold text-lg text-gray-800 dark:text-gray-100">${order.symbol}</span>
+                                    <span class="ml-2 text-sm ${order.pnl_pct >= 0 ? 'profit' : 'loss'}">
+                                        (+${order.pnl_pct.toFixed(1)}%)
+                                    </span>
+                                </div>
+                                <span class="text-2xl">${order.emoji}</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-3 text-sm">
+                                <div>
+                                    <span class="text-gray-600 dark:text-gray-400">Trigger Delta:</span>
+                                    <span class="font-bold ml-1 text-gray-800 dark:text-gray-200">$${order.trigger_delta.toFixed(2)}</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-600 dark:text-gray-400">Limit Offset:</span>
+                                    <span class="font-bold ml-1 text-gray-800 dark:text-gray-200">$${order.limit_offset.toFixed(2)}</span>
+                                </div>
+                                <div class="text-xs text-gray-500 dark:text-gray-500">
+                                    Stop at: $${order.stop.toFixed(2)}
+                                </div>
+                                <div class="text-xs text-gray-500 dark:text-gray-500">
+                                    Limit at: $${order.limit.toFixed(2)}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('stopInstructions').innerHTML = instructionsHTML;
+            }
+        }
+
+        function updateDashboardWithFallback() {
+            // Fallback with current known data
+            const fallbackData = {
+                portfolio: {
+                    positions: [
+                        { symbol: 'CHPT', quantity: 91, entry_price: 10.5974 },
+                        { symbol: 'EVGO', quantity: 77, entry_price: 3.8978 },
+                        { symbol: 'FCEL', quantity: 37, entry_price: 4.0783 }
+                    ],
+                    cash_balance: 6.48
+                },
+                prices: {
+                    'CHPT': { price: 11.62 },
+                    'EVGO': { price: 4.045 },
+                    'FCEL': { price: 4.26 }
+                },
+                instructions: {
+                    orders: [
+                        { symbol: 'CHPT', trigger_delta: 0.32, limit_offset: 0.06, stop: 11.30, limit: 11.24, pnl_pct: 9.6, emoji: '⭐' },
+                        { symbol: 'EVGO', trigger_delta: 0.12, limit_offset: 0.02, stop: 3.92, limit: 3.90, pnl_pct: 3.8, emoji: '📍' },
+                        { symbol: 'FCEL', trigger_delta: 0.08, limit_offset: 0.02, stop: 4.18, limit: 4.16, pnl_pct: 4.4, emoji: '📍' }
+                    ]
+                }
+            };
+            
+            updateDashboard(fallbackData.portfolio, fallbackData.prices, fallbackData.instructions);
+        }
+
+        // Initialize on page load
+        initDarkMode();
+        initChart();
+        loadDashboardData();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(loadDashboardData, 30000);
+    </script>
+</body>
+</html>

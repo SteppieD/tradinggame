@@ -1,0 +1,46 @@
+{
+  "generated": "2025-08-13T10:47:47.439615",
+  "orders": [
+    {
+      "symbol": "CHPT",
+      "emoji": "\ud83d\udccd",
+      "status": "BUILDING",
+      "current": 10.9,
+      "stop": 10.25,
+      "limit": 10.19,
+      "trigger_delta": 0.65,
+      "limit_offset": 0.06,
+      "quantity": 26,
+      "pnl_pct": 1.07,
+      "strategy": "TIGHT_STOP"
+    },
+    {
+      "symbol": "EVGO",
+      "emoji": "\ud83d\udccd",
+      "status": "BUILDING",
+      "current": 3.49,
+      "stop": 3.26,
+      "limit": 3.25,
+      "trigger_delta": 0.23,
+      "limit_offset": 0.01,
+      "quantity": 82,
+      "pnl_pct": -3.78,
+      "strategy": "PROTECT_CAPITAL"
+    },
+    {
+      "symbol": "FCEL",
+      "emoji": "\ud83d\ude80",
+      "status": "EXCELLENT",
+      "current": 6.08,
+      "stop": 5.9,
+      "limit": 5.87,
+      "trigger_delta": 0.18,
+      "limit_offset": 0.03,
+      "quantity": 97,
+      "pnl_pct": 50.12,
+      "strategy": "TIGHT_TRAIL"
+    }
+  ],
+  "total_positions": 3,
+  "total_pnl_percent": 15.803333333333333
+}
