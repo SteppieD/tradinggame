@@ -1,32 +1,32 @@
 {
   "CHPT": {
-    "price": 11.08,
-    "change": 0.43,
-    "change_percent": "4.0376",
-    "timestamp": "2025-08-13T13:42:10.294874"
+    "price": 12.05,
+    "change": 0.97,
+    "change_percent": "8.7545",
+    "timestamp": "2025-08-14T09:40:24.987995"
   },
   "EVGO": {
-    "price": 3.76,
-    "change": 0.2,
-    "change_percent": "5.6180",
-    "timestamp": "2025-08-13T13:42:10.295103"
+    "price": 3.94,
+    "change": 0.18,
+    "change_percent": "4.7872",
+    "timestamp": "2025-08-14T09:40:24.988180"
   },
   "FCEL": {
-    "price": 4.09,
-    "change": 0.02,
-    "change_percent": "0.4914",
-    "timestamp": "2025-08-13T13:42:10.295322"
+    "price": 4.26,
+    "change": 0.17,
+    "change_percent": "4.1565",
+    "timestamp": "2025-08-14T09:40:24.988350"
   },
   "SPY": {
-    "price": 642.69,
-    "change": 6.77,
-    "change_percent": "1.0646",
-    "timestamp": "2025-08-13T13:42:10.295611"
+    "price": 644.89,
+    "change": 2.2,
+    "change_percent": "0.3423",
+    "timestamp": "2025-08-14T09:40:24.988555"
   },
   "IWM": {
-    "price": 226.81,
-    "change": 6.54,
-    "change_percent": "2.9691",
-    "timestamp": "2025-08-13T13:42:10.295943"
+    "price": 231.22,
+    "change": 4.41,
+    "change_percent": "1.9444",
+    "timestamp": "2025-08-14T09:40:24.988983"
   }
 }

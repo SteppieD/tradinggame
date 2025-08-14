@@ -1,0 +1,28 @@
+{
+  "generated": "2025-08-13T14:15:54.598670",
+  "budget": 350.0,
+  "orders": [
+    {
+      "symbol": "TDUP",
+      "current_price": 10.51,
+      "limit_price": 10.4,
+      "shares": 15,
+      "order_cost": 156.0,
+      "total_with_commission": 162.95,
+      "stop_loss": 9.57,
+      "target": 13.0
+    },
+    {
+      "symbol": "FUBO",
+      "current_price": 3.77,
+      "limit_price": 3.7,
+      "shares": 44,
+      "order_cost": 162.8,
+      "total_with_commission": 169.75,
+      "stop_loss": 3.33,
+      "target": 5.0
+    }
+  ],
+  "total_investment": 332.7,
+  "cash_remaining": 82.05000000000001
+}

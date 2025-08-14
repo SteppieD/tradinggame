@@ -47,7 +47,7 @@
         <!-- 1. POSITION TRACKER -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
             <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
-                <span class="mr-2">💼</span> Position Tracker
+                <span class="mr-2">💼</span> Active Positions
             </h2>
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -64,6 +64,48 @@
                     </thead>
                     <tbody id="positionsTable" class="text-gray-800 dark:text-gray-200">
                         <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- REALIZED GAINS -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">🏆</span> Realized Gains (Closed Trades)
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700 text-sm">
+                        <tr>
+                            <th class="p-3 text-left text-gray-700 dark:text-gray-300">Symbol</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Shares</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Entry</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Exit</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">Profit</th>
+                            <th class="p-3 text-right text-gray-700 dark:text-gray-300">%</th>
+                            <th class="p-3 text-center text-gray-700 dark:text-gray-300">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="realizedTable" class="text-gray-800 dark:text-gray-200">
+                        <tr class="border-b dark:border-gray-700">
+                            <td class="p-3 font-bold">FCEL 🔒</td>
+                            <td class="p-3 text-right">97</td>
+                            <td class="p-3 text-right">$4.05</td>
+                            <td class="p-3 text-right">$4.26</td>
+                            <td class="p-3 text-right text-green-600 font-medium">$13.42</td>
+                            <td class="p-3 text-right text-green-600 font-medium">+3.4%</td>
+                            <td class="p-3 text-center text-sm text-gray-600 dark:text-gray-400">Aug 13</td>
+                        </tr>
+                        <tr class="bg-gray-50 dark:bg-gray-700 font-bold">
+                            <td class="p-3">TOTAL REALIZED</td>
+                            <td class="p-3 text-right">-</td>
+                            <td class="p-3 text-right">-</td>
+                            <td class="p-3 text-right">-</td>
+                            <td class="p-3 text-right text-green-600">$13.42</td>
+                            <td class="p-3 text-right text-green-600">+3.4%</td>
+                            <td class="p-3 text-center">-</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -91,25 +133,174 @@
                     <div class="text-xs text-gray-600 dark:text-gray-400" id="feeImpact">27% of profits</div>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                    <div class="text-sm text-gray-600 dark:text-gray-400">vs Benchmarks</div>
-                    <div class="text-sm mt-1 text-gray-700 dark:text-gray-300">SPY: <span id="spyComparison">-</span></div>
-                    <div class="text-sm text-gray-700 dark:text-gray-300">IWM: <span id="iwmComparison">-</span></div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">vs Benchmarks (from Aug 12)</div>
+                    <div class="text-sm mt-1 text-gray-700 dark:text-gray-300">
+                        <span class="font-medium">You:</span> <span id="yourReturn" class="font-bold">-</span>
+                    </div>
+                    <div class="text-sm text-gray-700 dark:text-gray-300">
+                        <span class="font-medium">SPY:</span> <span id="spyReturn">-</span> 
+                        <span class="text-xs">(<span id="spyComparison">-</span>)</span>
+                    </div>
+                    <div class="text-sm text-gray-700 dark:text-gray-300">
+                        <span class="font-medium">IWM:</span> <span id="iwmReturn">-</span>
+                        <span class="text-xs">(<span id="iwmComparison">-</span>)</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 3. NEXT DAY INSTRUCTIONS -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
-                <span class="mr-2">📱</span> CIBC Trailing Stop Orders - Tomorrow Morning
-            </h2>
-            <div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-600 p-4 mb-4">
-                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">⚠️ CRITICAL: Set these orders at 6:30 AM PST SHARP!</p>
-                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Order Type: TRAILING STOP LIMIT | Duration: DAY (expires 4PM ET)</p>
-                <p class="text-xs text-red-600 dark:text-red-400 mt-1 font-bold">These are NOT active overnight - you MUST set them each morning!</p>
+        <!-- 15% Monthly Goal Tracker -->
+        <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold mb-3">🎯 15% MONTHLY GOAL TRACKER</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white/20 rounded p-3">
+                    <div class="text-sm opacity-90">Current</div>
+                    <div class="text-2xl font-bold">+4.33%</div>
+                </div>
+                <div class="bg-white/20 rounded p-3">
+                    <div class="text-sm opacity-90">Need</div>
+                    <div class="text-2xl font-bold">+10.67%</div>
+                </div>
+                <div class="bg-white/20 rounded p-3">
+                    <div class="text-sm opacity-90">Days Left</div>
+                    <div class="text-2xl font-bold">28</div>
+                </div>
+                <div class="bg-white/20 rounded p-3">
+                    <div class="text-sm opacity-90">Target</div>
+                    <div class="text-2xl font-bold">$1,200</div>
+                </div>
             </div>
-            <div id="stopInstructions" class="space-y-4">
+            <div class="mt-4 bg-white/10 rounded p-2 text-sm">
+                <strong>Price Targets for 15%:</strong> CHPT→$13.75 | EVGO→$4.45 | FUBO→$4.50 | TDUP→$12.00
+            </div>
+        </div>
+        
+        <!-- 3. NEXT DAY INSTRUCTIONS -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+                <span class="mr-2">🚨</span> TRADING PLAN & STOP ORDERS
+            </h2>
+            
+            <!-- ORDERS COMPLETED - UPDATE AT 7 AM -->
+            <div class="bg-green-600 text-white p-4 rounded-lg mb-4">
+                <p class="text-lg font-bold mb-2">✅ MORNING ORDERS COMPLETED</p>
+                <p class="text-sm">TDUP: Filled 19 @ $10.45</p>
+                <p class="text-sm">FUBO: Filled 55 @ $3.67</p>
+                <p class="text-sm mt-2 font-bold">⏰ NEXT ACTION: Tighten stops at 7:00 AM PST (see below)</p>
+            </div>
+            
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 dark:border-yellow-600 p-4 mb-4">
+                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">📋 EXACT ORDER SEQUENCE:</p>
+                <ol class="text-xs text-gray-600 dark:text-gray-400 mt-2 ml-4 list-decimal">
+                    <li>Run: python update_prices.py (get fresh prices)</li>
+                    <li>Set CHPT & EVGO trailing stops FIRST</li>
+                    <li>Place TDUP & FUBO limit buy orders</li>
+                    <li>If buy orders fill, set stops immediately</li>
+                </ol>
+            </div>
+            
+            <!-- Existing Position Stops -->
+            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-3">1️⃣ Set Stop-Loss Orders (Existing Positions)</h3>
+            <div id="stopInstructions" class="space-y-4 mb-6">
                 <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <!-- New Position Orders -->
+            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-3 mt-6">2️⃣ Place Limit Buy Orders (NEW POSITIONS - MUST PLACE AT 6:30 AM)</h3>
+            <div class="border-2 border-orange-500 dark:border-orange-400 rounded-lg p-2 mb-4 bg-orange-50 dark:bg-orange-900/20">
+                <p class="text-sm font-bold text-orange-700 dark:text-orange-300">⚠️ These orders CANNOT be placed tonight - CIBC requires market hours!</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border dark:border-gray-700 rounded-lg p-4 bg-green-50 dark:bg-green-900/20">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">TDUP (ThredUp)</span>
+                        <span class="text-sm bg-green-600 text-white px-2 py-1 rounded">NEW</span>
+                    </div>
+                    <div class="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                        <div>Current: $10.51</div>
+                        <div class="font-semibold text-green-600 dark:text-green-400">Limit Order: $10.40</div>
+                        <div class="font-semibold">Quantity: 15 shares</div>
+                        <div>Total Cost: $162.95 (incl. fees)</div>
+                        <div class="text-xs mt-2 pt-2 border-t dark:border-gray-600">
+                            ✅ Recent earnings beat<br>
+                            🎯 Target: $13.00 (+25%)<br>
+                            🛡️ Stop Loss: $9.57 (-8%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border dark:border-gray-700 rounded-lg p-4 bg-green-50 dark:bg-green-900/20">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">FUBO (fuboTV)</span>
+                        <span class="text-sm bg-green-600 text-white px-2 py-1 rounded">NEW</span>
+                    </div>
+                    <div class="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                        <div>Current: $3.77</div>
+                        <div class="font-semibold text-green-600 dark:text-green-400">Limit Order: $3.70</div>
+                        <div class="font-semibold">Quantity: 44 shares</div>
+                        <div>Total Cost: $169.75 (incl. fees)</div>
+                        <div class="text-xs mt-2 pt-2 border-t dark:border-gray-600">
+                            ✅ First EBITDA positive<br>
+                            🎯 Target: $5.00 (+35%)<br>
+                            🛡️ Stop Loss: $3.33 (-10%)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cash Summary -->
+            <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">💰 Cash Deployment (Option 1 - Balanced)</h3>
+                <div class="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                    <div>Available Cash: $414.75</div>
+                    <div>TDUP Order: -$162.95</div>
+                    <div>FUBO Order: -$169.75</div>
+                    <div class="font-semibold text-green-600 dark:text-green-400 pt-1 border-t dark:border-gray-600">Remaining Cash: $82.05 (safety buffer)</div>
+                </div>
+            </div>
+            
+            <!-- 7:00 AM PST STOP ORDERS -->
+            <div class="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border-2 border-red-500 rounded-lg">
+                <h3 class="text-lg font-bold text-red-700 dark:text-red-300 mb-3">⏰ 7:00 AM PST - TIGHTEN ALL STOPS</h3>
+                <div class="text-sm space-y-3 text-gray-700 dark:text-gray-300">
+                    <div class="font-semibold text-red-600 dark:text-red-400">After morning volatility settles, UPDATE these trailing stops:</div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
+                        <div class="font-bold">CHPT - Trailing Stop-Limit:</div>
+                        <div class="ml-4 text-sm">
+                            <div>• Trigger Delta: $0.36</div>
+                            <div>• Limit Offset: $0.06</div>
+                            <div>• Quantity: 26 shares</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
+                        <div class="font-bold">EVGO - Trailing Stop-Limit:</div>
+                        <div class="ml-4 text-sm">
+                            <div>• Trigger Delta: $0.08</div>
+                            <div>• Limit Offset: $0.02</div>
+                            <div>• Quantity: 82 shares</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
+                        <div class="font-bold">TDUP - Stop-Limit (FIXED):</div>
+                        <div class="ml-4 text-sm">
+                            <div>• Stop Price: $9.61</div>
+                            <div>• Limit Price: $9.59</div>
+                            <div>• Quantity: 19 shares</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-3 rounded border dark:border-gray-700">
+                        <div class="font-bold">FUBO - Stop-Limit (FIXED):</div>
+                        <div class="ml-4 text-sm">
+                            <div>• Stop Price: $3.30</div>
+                            <div>• Limit Price: $3.28</div>
+                            <div>• Quantity: 55 shares</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -149,18 +340,12 @@
             const ctx = document.getElementById('performanceChart').getContext('2d');
             
             // Show actual trading days starting from Aug 12
-            const labels = ['Aug 12', 'Aug 13'];
+            const labels = ['Aug 12', 'Aug 13', 'Aug 14'];
             
-            // Actual performance data from your portfolio
-            // Aug 12: Initial investment $1000
-            // Aug 13: Current value $1036.50 (+3.65%)
-            const portfolioData = [1000, 1036.50];
-            
-            // Estimated benchmark performance (would need real data)
-            // SPY typically moves ~0.5-1% per day
-            // IWM typically moves ~0.8-1.2% per day
-            const spyData = [1000, 1012.00];  // +1.2%
-            const iwmData = [1000, 1008.00];  // +0.8%
+            // Will be dynamically updated based on portfolio data
+            const portfolioData = [1000, 1000, 1000];
+            const spyData = [1000, 1000, 1000];
+            const iwmData = [1000, 1000, 1000];
             
             performanceChart = new Chart(ctx, {
                 type: 'line',
@@ -252,6 +437,59 @@
             performanceChart.options.scales.y.grid.color = isDark ? '#374151' : '#e5e7eb';
             performanceChart.update();
         }
+        
+        function updateChartData(currentPortfolioValue, prices) {
+            if (!performanceChart) return;
+            
+            // Update portfolio data - CUMULATIVE from $1000 start
+            const portfolioData = [
+                1000,  // Aug 12 - Initial investment
+                1036.50,  // Aug 13 - After FCEL sale (+3.65%)
+                currentPortfolioValue  // Aug 14 - Current (should be ~1043)
+            ];
+            
+            // SPY and IWM CUMULATIVE performance
+            // Starting prices on Aug 12
+            const spyAug12 = 642.69;
+            const iwmAug12 = 226.81;
+            
+            // Aug 13 closing prices (estimates)
+            const spyAug13 = 643.50;  // SPY was up slightly
+            const iwmAug13 = 228.00;  // IWM was up slightly
+            
+            // Aug 14 current prices from API
+            const spyAug14 = prices['SPY']?.price || 644.89;
+            const iwmAug14 = prices['IWM']?.price || 231.22;
+            
+            // Calculate CUMULATIVE returns as if investing $1000 on Aug 12
+            const spyData = [
+                1000,  // Aug 12 - Start
+                1000 * (spyAug13 / spyAug12),  // Aug 13 - Cumulative
+                1000 * (spyAug14 / spyAug12)   // Aug 14 - Cumulative
+            ];
+            
+            const iwmData = [
+                1000,  // Aug 12 - Start
+                1000 * (iwmAug13 / iwmAug12),  // Aug 13 - Cumulative
+                1000 * (iwmAug14 / iwmAug12)   // Aug 14 - Cumulative
+            ];
+            
+            console.log('Chart Update:', {
+                portfolio: portfolioData,
+                spy: spyData,
+                iwm: iwmData,
+                portfolioReturn: ((currentPortfolioValue - 1000) / 10).toFixed(2) + '%',
+                spyReturn: ((spyAug14 / spyAug12 - 1) * 100).toFixed(2) + '%',
+                iwmReturn: ((iwmAug14 / iwmAug12 - 1) * 100).toFixed(2) + '%'
+            });
+            
+            // Update chart datasets
+            performanceChart.data.datasets[0].data = portfolioData;
+            performanceChart.data.datasets[1].data = spyData;
+            performanceChart.data.datasets[2].data = iwmData;
+            
+            performanceChart.update();
+        }
 
         // Load and display data
         async function loadDashboardData() {
@@ -281,9 +519,9 @@
             document.getElementById('updateTime').textContent = 
                 `Last Update: ${new Date().toLocaleTimeString()}`;
             
-            // Calculate positions
+            // Calculate positions - All active positions
             const positions = portfolio.positions.filter(p => 
-                ['CHPT', 'EVGO', 'FCEL'].includes(p.symbol)
+                ['CHPT', 'EVGO', 'TDUP', 'FUBO'].includes(p.symbol)
             );
             
             let totalValue = 0;
@@ -316,13 +554,14 @@
             });
             
             // Add total row
+            const totalShares = positions.reduce((sum, p) => sum + p.quantity, 0);
             const totalCost = positions.reduce((sum, p) => sum + (p.quantity * p.entry_price), 0);
             const totalReturn = (totalPnL / totalCost) * 100;
             
             positionsHTML += `
                 <tr class="bg-gray-50 dark:bg-gray-700 font-bold">
-                    <td class="p-3">TOTAL</td>
-                    <td class="p-3 text-right">205</td>
+                    <td class="p-3">TOTAL ACTIVE</td>
+                    <td class="p-3 text-right">${totalShares}</td>
                     <td class="p-3 text-right">-</td>
                     <td class="p-3 text-right">-</td>
                     <td class="p-3 text-right">$${totalValue.toFixed(2)}</td>
@@ -337,8 +576,11 @@
             const portfolioValue = portfolio.cash_balance + totalValue;
             const portfolioReturn = ((portfolioValue - 1000) / 1000) * 100;
             
-            // Fee calculations (3 trades at $6.95 each)
-            const totalFees = 20.85;
+            // Update chart with current portfolio value
+            updateChartData(portfolioValue, prices);
+            
+            // Fee calculations (6 trades at $6.95 each: 3 buys, 1 sell, 2 new buys)
+            const totalFees = 41.70;
             const netPnL = portfolioValue - 1000;  // This is after fees already
             const grossPnL = totalPnL;  // Position P&L before considering fees
             const feePercentOfProfit = grossPnL > 0 ? (totalFees / grossPnL * 100) : 0;
@@ -356,17 +598,33 @@
             document.getElementById('totalFees').textContent = `-$${totalFees.toFixed(2)}`;
             document.getElementById('feeImpact').textContent = `${feePercentOfProfit.toFixed(0)}% of profits`;
             
-            // Update benchmark comparison
-            const spyReturn = 1.2; // Placeholder
-            const iwmReturn = 0.8; // Placeholder
+            // Update benchmark comparison using actual price data
+            // Calculate cumulative returns from Aug 12
+            const spyStartPrice = 642.69;  // Aug 12 baseline
+            const iwmStartPrice = 226.81;  // Aug 12 baseline
+            
+            const spyCurrentPrice = prices['SPY']?.price || 644.89;
+            const iwmCurrentPrice = prices['IWM']?.price || 231.22;
+            
+            const spyReturn = ((spyCurrentPrice - spyStartPrice) / spyStartPrice) * 100;
+            const iwmReturn = ((iwmCurrentPrice - iwmStartPrice) / iwmStartPrice) * 100;
+            
             const spyDiff = portfolioReturn - spyReturn;
             const iwmDiff = portfolioReturn - iwmReturn;
             
-            document.getElementById('spyComparison').textContent = `${spyDiff >= 0 ? '+' : ''}${spyDiff.toFixed(1)}%`;
-            document.getElementById('spyComparison').className = spyDiff >= 0 ? 'profit font-bold' : 'loss';
+            // Update your return display
+            document.getElementById('yourReturn').textContent = `${portfolioReturn >= 0 ? '+' : ''}${portfolioReturn.toFixed(2)}%`;
+            document.getElementById('yourReturn').className = portfolioReturn >= 0 ? 'font-bold text-green-600 dark:text-green-400' : 'font-bold text-red-600 dark:text-red-400';
             
-            document.getElementById('iwmComparison').textContent = `${iwmDiff >= 0 ? '+' : ''}${iwmDiff.toFixed(1)}%`;
-            document.getElementById('iwmComparison').className = iwmDiff >= 0 ? 'profit font-bold' : 'loss';
+            // Update SPY comparison
+            document.getElementById('spyReturn').textContent = `${spyReturn >= 0 ? '+' : ''}${spyReturn.toFixed(2)}%`;
+            document.getElementById('spyComparison').textContent = `${spyDiff >= 0 ? 'Beat by ' : 'Trail by '}${Math.abs(spyDiff).toFixed(1)}%`;
+            document.getElementById('spyComparison').className = spyDiff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+            
+            // Update IWM comparison
+            document.getElementById('iwmReturn').textContent = `${iwmReturn >= 0 ? '+' : ''}${iwmReturn.toFixed(2)}%`;
+            document.getElementById('iwmComparison').textContent = `${iwmDiff >= 0 ? 'Beat by ' : 'Trail by '}${Math.abs(iwmDiff).toFixed(1)}%`;
+            document.getElementById('iwmComparison').className = iwmDiff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
             
             // Update stop instructions
             if (instructions && instructions.orders) {
@@ -407,26 +665,29 @@
         }
 
         function updateDashboardWithFallback() {
-            // Fallback with current known data
+            // Fallback with current known data (updated Aug 14)
             const fallbackData = {
                 portfolio: {
                     positions: [
-                        { symbol: 'CHPT', quantity: 91, entry_price: 10.5974 },
-                        { symbol: 'EVGO', quantity: 77, entry_price: 3.8978 },
-                        { symbol: 'FCEL', quantity: 37, entry_price: 4.0783 }
+                        { symbol: 'CHPT', quantity: 26, entry_price: 10.7845 },
+                        { symbol: 'EVGO', quantity: 82, entry_price: 3.6271 },
+                        { symbol: 'TDUP', quantity: 19, entry_price: 10.45 },
+                        { symbol: 'FUBO', quantity: 55, entry_price: 3.67 }
                     ],
-                    cash_balance: 6.48
+                    cash_balance: 0.45
                 },
                 prices: {
-                    'CHPT': { price: 11.62 },
-                    'EVGO': { price: 4.045 },
-                    'FCEL': { price: 4.26 }
+                    'CHPT': { price: 12.05 },
+                    'EVGO': { price: 3.94 },
+                    'TDUP': { price: 10.51 },
+                    'FUBO': { price: 3.76 },
+                    'SPY': { price: 644.89 },
+                    'IWM': { price: 231.22 }
                 },
                 instructions: {
                     orders: [
-                        { symbol: 'CHPT', trigger_delta: 0.32, limit_offset: 0.06, stop: 11.30, limit: 11.24, pnl_pct: 9.6, emoji: '⭐' },
-                        { symbol: 'EVGO', trigger_delta: 0.12, limit_offset: 0.02, stop: 3.92, limit: 3.90, pnl_pct: 3.8, emoji: '📍' },
-                        { symbol: 'FCEL', trigger_delta: 0.08, limit_offset: 0.02, stop: 4.18, limit: 4.16, pnl_pct: 4.4, emoji: '📍' }
+                        { symbol: 'CHPT', trigger_delta: 0.18, limit_offset: 0.06, stop: 10.90, limit: 10.84, pnl_pct: 2.74, emoji: '📍' },
+                        { symbol: 'EVGO', trigger_delta: 0.08, limit_offset: 0.02, stop: 3.68, limit: 3.66, pnl_pct: 3.66, emoji: '📍' }
                     ]
                 }
             };

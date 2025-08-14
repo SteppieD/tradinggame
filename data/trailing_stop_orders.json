@@ -1,0 +1,29 @@
+{
+  "generated": "2025-08-14T06:43:15.464667",
+  "orders": [
+    {
+      "symbol": "CHPT",
+      "shares": 26,
+      "current_price": 12.05,
+      "entry_price": 10.7845,
+      "trigger_delta": 0.36,
+      "limit_offset": 0.06,
+      "stop_trigger": 11.69,
+      "stop_limit": 11.63,
+      "pnl_pct": 11.734433677963755,
+      "strategy": "PROFIT_PROTECTION"
+    },
+    {
+      "symbol": "EVGO",
+      "shares": 82,
+      "current_price": 3.94,
+      "entry_price": 3.6271,
+      "trigger_delta": 0.08,
+      "limit_offset": 0.02,
+      "stop_trigger": 3.86,
+      "stop_limit": 3.84,
+      "pnl_pct": 8.626726585977778,
+      "strategy": "FIBONACCI_STOP"
+    }
+  ]
+}

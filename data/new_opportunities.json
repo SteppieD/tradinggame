@@ -1,0 +1,34 @@
+{
+  "generated": "2025-08-13T14:15:00",
+  "opportunities": [
+    {
+      "symbol": "TDUP",
+      "name": "ThredUp Inc.",
+      "current_price": 10.51,
+      "limit_order": 10.40,
+      "shares": 19,
+      "total_cost": 206.64,
+      "target_price": 13.00,
+      "upside_percent": 24,
+      "catalyst": "Recent earnings beat",
+      "fundamentals": "Online secondhand marketplace leader with improving margins",
+      "risk_level": "Medium"
+    },
+    {
+      "symbol": "FUBO",
+      "name": "fuboTV Inc.",
+      "current_price": 3.77,
+      "limit_order": 3.70,
+      "shares": 53,
+      "total_cost": 206.50,
+      "target_price": 5.00,
+      "upside_percent": 30,
+      "catalyst": "First EBITDA positive quarter",
+      "fundamentals": "Streaming service achieving profitability milestone, up 209% YTD",
+      "risk_level": "Medium-High"
+    }
+  ],
+  "total_investment": 413.13,
+  "cash_available": 414.75,
+  "cash_remaining": 1.62
+}

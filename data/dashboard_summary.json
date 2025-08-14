@@ -1,41 +1,55 @@
 {
-  "last_update": "2025-08-13T09:32:13.161675",
-  "portfolio_value": 1001.6099999999999,
-  "total_pnl": 1.6099999999999,
-  "total_pnl_pct": 0.16099999999998998,
-  "iwm_value": 999.32486,
-  "spy_value": 981.3876300000001,
-  "alpha": -1.8671089350654848,
-  "prices": {
-    "CHPT": {
-      "price": 11.08,
-      "change": 0.43,
-      "change_percent": "4.0376",
-      "timestamp": "2025-08-13T09:29:27.537416"
+  "last_update": "2025-08-13T13:56:01.462365",
+  "portfolio": {
+    "cash_balance": 414.75,
+    "positions_value": 596.4,
+    "total_value": 1011.15,
+    "initial_investment": 1000.0,
+    "net_return": 11.149999999999977,
+    "net_return_pct": 1.1149999999999978,
+    "cash_percentage": 41.01765316718588
+  },
+  "positions": [
+    {
+      "symbol": "CHPT",
+      "quantity": 26,
+      "entry_price": 10.7845,
+      "current_price": 11.08,
+      "cost": 280.397,
+      "value": 288.08,
+      "pnl": 7.682999999999993,
+      "pnl_pct": 2.7400435810654153
     },
-    "EVGO": {
-      "price": 3.76,
-      "change": 0.2,
-      "change_percent": "5.6180",
-      "timestamp": "2025-08-13T09:29:39.512661"
-    },
-    "FCEL": {
-      "price": 4.09,
-      "change": 0.02,
-      "change_percent": "0.4914",
-      "timestamp": "2025-08-13T09:29:51.529462"
-    },
+    {
+      "symbol": "EVGO",
+      "quantity": 82,
+      "entry_price": 3.6271,
+      "current_price": 3.76,
+      "cost": 297.4222,
+      "value": 308.32,
+      "pnl": 10.897800000000018,
+      "pnl_pct": 3.6640842546386985
+    }
+  ],
+  "fees": {
+    "total_trades": 4,
+    "fee_per_trade": 6.95,
+    "total_fees": 27.8,
+    "fees_as_pct_of_initial": 2.7800000000000002,
+    "fees_as_pct_of_return": 249.32735426009017
+  },
+  "realized_gains": {
+    "FCEL": 13.42,
+    "total": 13.42
+  },
+  "benchmarks": {
     "SPY": {
       "price": 642.69,
-      "change": 6.77,
-      "change_percent": "1.0646",
-      "timestamp": "2025-08-13T09:30:03.731153"
+      "return_since_start": 0.1074766355140272
     },
     "IWM": {
       "price": 226.81,
-      "change": 6.54,
-      "change_percent": "2.9691",
-      "timestamp": "2025-08-13T09:30:15.535208"
+      "return_since_start": 0.5809312638580941
     }
   }
 }
