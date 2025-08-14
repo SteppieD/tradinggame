@@ -15,11 +15,34 @@ This is a live trading experiment with real money! Follow along on YouTube:
 
 Starting with **$1,000 CAD** in a TFSA account, we're using AI-powered analysis to trade small-cap stocks. Every trade, decision, and lesson learned is documented here and on the YouTube channel.
 
-### Current Status (Aug 12, 2025)
-- **Starting Balance:** $1,000
-- **Current Positions:** 3 (CHPT, EVGO, FCEL)
-- **Strategy:** Clean tech momentum plays
-- **Risk Management:** 10% trailing stops on all positions
+### 📈 Live Performance (Updated: Aug 14, 2025 - Day 2)
+- **Starting Balance:** $1,000 CAD
+- **Current Value:** $1,043.32 (+4.33%) 🚀
+- **Benchmark Performance:** Beating SPY by 4%, IWM by 2.4%
+- **Win Rate:** 100% (4/4 positions green)
+
+### 🎯 Monthly Goal: 15% Returns
+- **Current Progress:** 4.33% / 15% (28.9% complete)
+- **Days Elapsed:** 2 / 30
+- **Target Portfolio Value:** $1,200
+- **On Track:** ✅ YES (Ahead of schedule!)
+
+### 💼 Current Positions
+| Symbol | Shares | Entry | Current | P&L | Status |
+|--------|--------|-------|---------|-----|--------|
+| CHPT | 26 | $10.78 | $12.05 | +11.7% | 🚀 Strong |
+| EVGO | 82 | $3.63 | $3.94 | +8.6% | ⭐ Steady |
+| TDUP | 19 | $10.45 | $10.51 | +0.6% | 🆕 New |
+| FUBO | 55 | $3.67 | $3.76 | +2.5% | 🆕 Momentum |
+
+### 📊 Completed Trades
+- **FCEL:** Sold at $4.26 (+3.4%) - Profit: $13.42
+
+### 🎲 Strategy Updates
+- **Focus:** High-growth momentum plays + aggressive position management
+- **New Goal:** 10x portfolio in 6 months ($1,000 → $10,000)
+- **Risk Management:** Trailing stops on winners, -5% fixed stops on new entries
+- **Next Targets:** IONQ (quantum computing), ASTS (satellite)
 
 ## 🤖 Built with Claude Code
 
